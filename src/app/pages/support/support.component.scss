@@ -1,0 +1,71 @@
+.support-page {
+  padding: 2rem;
+  max-width: 960px;
+  margin: auto;
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .intro {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: #555;
+  }
+
+  .support-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .support-card {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    text-align: center;
+
+    h3 {
+      margin-top: 0;
+      font-size: 1.2rem;
+    }
+
+    p {
+      color: #555;
+      margin-bottom: 1.2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      background-color: #4caf50;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: #388e3c;
+      }
+    }
+  }
+
+  .bottom-note {
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 0.95rem;
+    color: #666;
+
+    a {
+      color: #4caf50;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
