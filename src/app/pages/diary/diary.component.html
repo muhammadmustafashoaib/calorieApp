@@ -1,1 +1,69 @@
-<p>diary works!</p>
+<div class="diary-container">
+  <h2>🍽️ Food Diary</h2>
+
+  <!-- Dropdown -->
+  <div class="food-select">
+    <select [(ngModel)]="selectedFoodName" (change)="onFoodSelect()">
+  <option value="" disabled selected>Select a food</option>
+      <option *ngFor="let food of foodOptions" [value]="food.name">{{ food.name }}</option>
+    </select>
+  </div>
+
+  <!-- Selected Food Info -->
+  <div class="food-details" *ngIf="selectedFood">
+    <p><strong>Calories:</strong> {{ selectedFood.calories }} kcal</p>
+    <p><strong>Carbs:</strong> {{ selectedFood.carbs }} g</p>
+    <p><strong>Protein:</strong> {{ selectedFood.protein }} g</p>
+    <p><strong>Fat:</strong> {{ selectedFood.fat }} g</p>
+    <p><strong>Fiber:</strong> {{ selectedFood.fiber }} g</p>
+    <button class="add-btn" (click)="addSelectedFood()">➕ Add to Diary</button>
+  </div>
+
+  <!-- Table -->
+  <div class="diary-table" *ngIf="foodEntries.length > 0">
+    <table>
+      <thead>
+        <tr>
+          <th>Food</th>
+          <th>Calories</th>
+          <th>Carbs</th>
+          <th>Protein</th>
+          <th>Fat</th>
+          <th>Fiber</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let food of foodEntries; let i = index">
+          <td>{{ food.name }}</td>
+          <td>{{ food.calories }}</td>
+          <td>{{ food.carbs }}</td>
+          <td>{{ food.protein }}</td>
+          <td>{{ food.fat }}</td>
+          <td>{{ food.fiber }}</td>
+          <td><button class="remove-btn" (click)="removeFood(i)">Remove</button></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr class="total-row">
+          <td>Total</td>
+          <td>{{ getTotal('calories') }}</td>
+          <td>{{ getTotal('carbs') }}</td>
+          <td>{{ getTotal('protein') }}</td>
+          <td>{{ getTotal('fat') }}</td>
+          <td>{{ getTotal('fiber') }}</td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <!-- Chart -->
+  <div class="chart-wrapper" *ngIf="foodEntries.length > 0">
+    <canvas baseChart
+            [data]="chartData"
+            [type]="chartType"
+            [options]="chartOptions">
+    </canvas>
+  </div>
+</div>

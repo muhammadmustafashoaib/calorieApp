@@ -8,9 +8,10 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { DiaryComponent } from './pages/diary/diary.component';
 import { AddfoodComponent } from './pages/addfood/addfood.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { NgChartsModule } from 'ng2-charts';
 import { SupportComponent } from './pages/support/support.component';
 import { AboutComponent } from './pages/about/about.component';
+import { FormsModule } from '@angular/forms';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,9 @@ import { AboutComponent } from './pages/about/about.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NgChartsModule  // ✅ Correct for ng2-charts v4+
+    
+  FormsModule,
+  NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
