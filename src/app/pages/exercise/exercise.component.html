@@ -1,0 +1,67 @@
+<div class="exercise-container">
+  <div class="header">
+    <h2>🏋️ Exercise Tracker</h2>
+    <p class="subtitle">Log your exercises & track burned calories.</p>
+  </div>
+
+  <div class="card">
+    <form class="exercise-form" (ngSubmit)="logExercise()">
+      <div class="form-group">
+        <label for="exercise">Exercise</label>
+        <select [(ngModel)]="selectedExercise" name="exercise" id="exercise" required>
+          <option [ngValue]="null" disabled selected>Select Exercise</option>
+          <option *ngFor="let e of exercisesList" [ngValue]="e">
+            {{ e.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="duration">Duration</label>
+        <select [(ngModel)]="duration" name="duration" id="duration" required>
+          <option [ngValue]="null" disabled selected>Select Duration</option>
+          <option *ngFor="let d of durationsList" [ngValue]="d">{{ d }} minutes</option>
+        </select>
+      </div>
+
+      <button
+        type="submit"
+        class="btn-primary"
+        [disabled]="!selectedExercise || !duration">
+        ➕ Log Exercise
+      </button>
+    </form>
+
+    <div class="calories-preview" *ngIf="selectedExercise && duration">
+      <p>
+        🔥 <strong>{{ calculatedCalories }}</strong> kcal burned for
+        <strong>{{ duration }}</strong> min of
+        <strong>{{ selectedExercise.name }}</strong>
+      </p>
+    </div>
+  </div>
+
+  <div class="logged-list" *ngIf="loggedExercises.length > 0">
+    <h3>📋 Logged Exercises</h3>
+    <div class="log-cards">
+      <div class="log-card" *ngFor="let ex of loggedExercises">
+        <p><strong>{{ ex.name }}</strong></p>
+        <p>{{ ex.duration }} min • {{ ex.calories }} kcal</p>
+      </div>
+    </div>
+
+    <div class="summary">
+      <h4>✅ Totals</h4>
+      <div class="summary-grid">
+        <div class="summary-item">
+          <p>Total Time</p>
+          <strong>{{ totalTime }} minutes</strong>
+        </div>
+        <div class="summary-item">
+          <p>Total Calories Burned</p>
+          <strong>{{ totalCalories }} kcal</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

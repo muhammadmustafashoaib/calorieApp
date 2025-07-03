@@ -1,0 +1,138 @@
+.exercise-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  font-family: 'Segoe UI', sans-serif;
+  padding: 1rem;
+
+  .header {
+    text-align: center;
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: #777;
+      font-size: 0.95rem;
+    }
+  }
+
+  .card {
+    background: #fff;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+
+  .exercise-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    .form-group {
+      flex: 1 1 200px;
+      display: flex;
+      flex-direction: column;
+
+      label {
+        font-size: 0.85rem;
+        margin-bottom: 0.3rem;
+        color: #444;
+      }
+
+      select {
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+    }
+
+    .btn-primary {
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 4px;
+      cursor: pointer;
+      align-self: flex-end;
+
+      &:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+
+      &:hover:not(:disabled) {
+        background-color: #43a047;
+      }
+    }
+  }
+
+  .calories-preview {
+    margin-top: 1rem;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .logged-list {
+    margin-top: 2rem;
+
+    .log-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+
+      .log-card {
+        background: #f9f9f9;
+        padding: 0.8rem;
+        border-radius: 6px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+
+        p {
+          margin: 0.2rem 0;
+        }
+      }
+    }
+  }
+}
+.summary {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 6px;
+
+  h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    color: #333;
+  }
+
+  .summary-grid {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    .summary-item {
+      flex: 1 1 150px;
+      background: #fff;
+      padding: 0.5rem;
+      border-radius: 4px;
+      text-align: center;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+
+      p {
+        margin: 0;
+        font-size: 0.85rem;
+        color: #666;
+      }
+
+      strong {
+        display: block;
+        margin-top: 0.2rem;
+        font-size: 1rem;
+        color: #222;
+      }
+    }
+  }
+}

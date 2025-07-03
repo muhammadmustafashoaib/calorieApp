@@ -9,6 +9,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { TrendsComponent } from './pages/trends/trends.component';
 import { FoodsComponent } from './pages/foods/foods.component';
 import { PlansComponent } from './pages/plans/plans.component';
+import { ExerciseComponent } from './pages/exercise/exercise.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -20,7 +21,8 @@ const routes: Routes = [
   ,{path:'about', component:AboutComponent},
   {path:'trends', component: TrendsComponent},
   {path:'foods', component:FoodsComponent},
-  {path:'plans', component:PlansComponent}
+  {path:'plans', component:PlansComponent},
+  {path:'exercise', component:ExerciseComponent}
 
 ];
 

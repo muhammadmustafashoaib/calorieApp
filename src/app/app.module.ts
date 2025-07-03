@@ -15,6 +15,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { TrendsComponent } from './pages/trends/trends.component';
 import { FoodsComponent } from './pages/foods/foods.component';
 import { PlansComponent } from './pages/plans/plans.component';
+import { ExerciseComponent } from './pages/exercise/exercise.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { PlansComponent } from './pages/plans/plans.component';
     AboutComponent,
     TrendsComponent,
     FoodsComponent,
-    PlansComponent
+    PlansComponent,
+    ExerciseComponent
   ],
   imports: [
     BrowserModule,
