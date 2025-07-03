@@ -1,0 +1,35 @@
+<div class="foods-container">
+  <h2>🥗 Food Library</h2>
+
+  <input
+    type="text"
+    [(ngModel)]="searchTerm"
+    placeholder="Search for a food…"
+    class="search-input"
+  />
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Food</th>
+          <th>Calories</th>
+          <th>Carbs (g)</th>
+          <th>Protein (g)</th>
+          <th>Fat (g)</th>
+          <th>Fiber (g)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let food of filteredFoods">
+          <td>{{ food.name }}</td>
+          <td>{{ food.calories }}</td>
+          <td>{{ food.carbs }}</td>
+          <td>{{ food.protein }}</td>
+          <td>{{ food.fat }}</td>
+          <td>{{ food.fiber }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

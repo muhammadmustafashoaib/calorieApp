@@ -1,0 +1,13 @@
+<div class="trends-container">
+  <h2>📈 Weekly Calorie Trends</h2>
+
+  <div class="chart-wrapper">
+    <canvas baseChart
+            [data]="trendsChartData"
+            [type]="trendsChartType"
+            [options]="trendsChartOptions">
+    </canvas>
+  </div>
+
+  <p class="note">Note: Data shown here is for illustration. Hook it to real diary data later!</p>
+</div>

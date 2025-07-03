@@ -12,6 +12,9 @@ import { SupportComponent } from './pages/support/support.component';
 import { AboutComponent } from './pages/about/about.component';
 import { FormsModule } from '@angular/forms';
 import { NgChartsModule } from 'ng2-charts';
+import { TrendsComponent } from './pages/trends/trends.component';
+import { FoodsComponent } from './pages/foods/foods.component';
+import { PlansComponent } from './pages/plans/plans.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { NgChartsModule } from 'ng2-charts';
     AddfoodComponent,
     ProfileComponent,
     SupportComponent,
-    AboutComponent
+    AboutComponent,
+    TrendsComponent,
+    FoodsComponent,
+    PlansComponent
   ],
   imports: [
     BrowserModule,
