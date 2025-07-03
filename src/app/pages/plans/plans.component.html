@@ -1,27 +1,29 @@
 <div class="plans-container">
-  <h2>📝 Nutrition Plans</h2>
-  <p class="intro">Choose a nutrition plan that aligns with your goals.</p>
+  <h2>✨ Nutrition Plans</h2>
+  <p class="intro">Find the perfect plan for your goals and lifestyle.</p>
 
   <div class="plan-cards">
     <div class="plan-card" *ngFor="let plan of plans">
-      <h3>{{ plan.name }}</h3>
-      <p class="desc">{{ plan.description }}</p>
+      <div class="header">
+        <h3>{{ plan.name }}</h3>
+        <p class="desc">{{ plan.description }}</p>
+      </div>
 
       <div class="macros">
-        <p><strong>Calories:</strong> {{ plan.calories }}</p>
-        <p><strong>Carbs:</strong> {{ plan.carbs }}g</p>
-        <p><strong>Protein:</strong> {{ plan.protein }}g</p>
-        <p><strong>Fat:</strong> {{ plan.fat }}g</p>
+        <p><span>🔥 Calories:</span> {{ plan.calories }}</p>
+        <p><span>🥖 Carbs:</span> {{ plan.carbs }}g</p>
+        <p><span>🍗 Protein:</span> {{ plan.protein }}g</p>
+        <p><span>🥑 Fat:</span> {{ plan.fat }}g</p>
       </div>
 
       <div class="meals">
-        <p><strong>Suggested Meals:</strong></p>
+        <p class="meals-title">Suggested Meals:</p>
         <ul>
-          <li *ngFor="let meal of plan.meals">{{ meal }}</li>
+          <li *ngFor="let meal of plan.meals">🍽️ {{ meal }}</li>
         </ul>
       </div>
 
-      <button class="select-btn">Select Plan</button>
+      <button class="select-btn">Select This Plan</button>
     </div>
   </div>
 </div>
