@@ -1,0 +1,32 @@
+<div class="notes-container">
+  <h3>📝 Notes</h3>
+
+  <div class="add-note">
+    <textarea
+      [(ngModel)]="newNoteText"
+      placeholder="Write a note..."
+      rows="2"
+    ></textarea>
+    <button (click)="addNote()" [disabled]="!newNoteText.trim()">Add Note</button>
+  </div>
+
+  <ul class="notes-list">
+    <li *ngFor="let note of notes">
+      <div *ngIf="!note.editing" class="note-display">
+        <span>{{ note.text }}</span>
+        <div class="actions">
+          <button (click)="enableEdit(note)">✏️ Edit</button>
+          <button (click)="deleteNote(note.id)">🗑️ Delete</button>
+        </div>
+      </div>
+
+      <div *ngIf="note.editing" class="note-edit">
+        <textarea [(ngModel)]="note.text" rows="2"></textarea>
+        <div class="actions">
+          <button (click)="saveEdit(note)">💾 Save</button>
+          <button (click)="cancelEdit(note)">❌ Cancel</button>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

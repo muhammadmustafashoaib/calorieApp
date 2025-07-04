@@ -1,0 +1,124 @@
+.bmi-container {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+    color: #2b6cb0;
+  }
+
+  p {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #4a5568;
+  }
+
+  .bmi-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      label {
+        font-weight: 600;
+        color: #2d3748;
+      }
+
+      .input-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+
+        input,
+        select {
+          flex: 1 1 45%;
+          min-width: 120px;
+          padding: 0.5rem;
+          font-size: 1rem;
+          border: 1px solid #cbd5e0;
+          border-radius: 8px;
+          outline: none;
+
+          &:focus {
+            border-color: #3182ce;
+            box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.3);
+          }
+        }
+      }
+    }
+  }
+
+  .bmi-result {
+    margin-top: 2rem;
+    padding: 1rem;
+    border-radius: 12px;
+    background: #f7fafc;
+    text-align: center;
+
+    h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+
+      span {
+        color: #2b6cb0;
+        font-weight: bold;
+      }
+    }
+
+    .status {
+      font-weight: 600;
+      font-size: 1.1rem;
+
+      &.underweight {
+        color: #dd6b20;
+      }
+
+      &.normal {
+        color: #38a169;
+      }
+
+      &.overweight {
+        color: #d69e2e;
+      }
+
+      &.obese {
+        color: #e53e3e;
+      }
+    }
+  }
+}
+
+/* Add a media query for very small screens */
+@media (max-width: 400px) {
+  .bmi-container {
+    padding: 1rem;
+
+    h2 {
+      font-size: 1.4rem;
+    }
+
+    .bmi-form {
+      .form-group {
+        .input-row {
+          flex-direction: column;
+
+          input,
+          select {
+            flex: 1 1 100%;
+            min-width: auto;
+          }
+        }
+      }
+    }
+  }
+}

@@ -10,6 +10,8 @@ import { TrendsComponent } from './pages/trends/trends.component';
 import { FoodsComponent } from './pages/foods/foods.component';
 import { PlansComponent } from './pages/plans/plans.component';
 import { ExerciseComponent } from './pages/exercise/exercise.component';
+import { BMIComponent } from './pages/bmi/bmi.component';
+import { NotesComponent } from './pages/notes/notes.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -22,7 +24,9 @@ const routes: Routes = [
   {path:'trends', component: TrendsComponent},
   {path:'foods', component:FoodsComponent},
   {path:'plans', component:PlansComponent},
-  {path:'exercise', component:ExerciseComponent}
+  {path:'exercise', component:ExerciseComponent},
+  {path:'bmi', component:BMIComponent},
+  {path:'notes', component:NotesComponent}
 
 ];
 
