@@ -1,10 +1,12 @@
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
 <div class="notes-container">
   <h3>📝 Notes</h3>
 
   <div class="add-note">
     <textarea
       [(ngModel)]="newNoteText"
-      placeholder="Write a note..."
+      placeholder="Write a note"
       rows="2"
     ></textarea>
     <button (click)="addNote()" [disabled]="!newNoteText.trim()">Add Note</button>
