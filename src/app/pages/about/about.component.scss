@@ -1,74 +1,104 @@
 .about-page {
-  max-width: 900px;
-  margin: auto;
-  padding: 2rem;
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
 
   .intro {
     text-align: center;
     margin-bottom: 2rem;
 
     h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #2e7d32;
+
+      span {
+        color: #43a047;
+      }
     }
 
     p {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       color: #666;
+      margin-top: 0.5rem;
     }
   }
 
   .content {
-    h2 {
-      font-size: 1.4rem;
-      margin-top: 2rem;
-    }
+    display: grid;
+    gap: 1.5rem;
 
-    p {
-      margin-top: 0.5rem;
-      color: #444;
-      line-height: 1.6;
-    }
+    .card {
+      background: #fff;
+      padding: 1.2rem;
+      border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
 
-    ul {
-      list-style: none;
-      padding: 0;
-      margin-top: 1rem;
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+      }
 
-      li {
-        background-color: #f3f4f6;
-        padding: 0.75rem 1rem;
+      h2 {
+        font-size: 1.3rem;
+        color: #4caf50;
         margin-bottom: 0.5rem;
-        border-radius: 6px;
+      }
+
+      p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: #444;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          background: #f1f8e9;
+          padding: 0.6rem 1rem;
+          margin-bottom: 0.4rem;
+          border-left: 4px solid #81c784;
+          border-radius: 4px;
+          font-size: 0.95rem;
+        }
       }
     }
+  }
 
-    .cta {
-      margin-top: 2rem;
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
+  .cta {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
 
-      .btn {
-        background-color: #4caf50;
-        color: white;
-        padding: 0.7rem 1.4rem;
-        text-decoration: none;
-        border-radius: 6px;
-        font-weight: 600;
-        transition: background-color 0.2s ease;
+    .btn {
+      display: inline-block;
+      background: #4caf50;
+      color: #fff;
+      padding: 0.7rem 1.4rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: #388e3c;
+      }
+
+      &.secondary {
+        background: #e0e0e0;
+        color: #333;
 
         &:hover {
-          background-color: #388e3c;
-        }
-
-        &.secondary {
-          background-color: #e0e0e0;
-          color: #333;
-
-          &:hover {
-            background-color: #d5d5d5;
-          }
+          background: #d5d5d5;
         }
       }
     }
