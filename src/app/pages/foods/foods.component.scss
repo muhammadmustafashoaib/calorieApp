@@ -1,26 +1,32 @@
 .foods-container {
-  max-width: 900px;
+  max-width: 960px;
   margin: 2rem auto;
-  padding: 1.5rem;
+  padding: 2rem 1.5rem;
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
   font-family: 'Segoe UI', sans-serif;
 
   h2 {
     text-align: center;
-    margin-bottom: 1rem;
-    font-size: 1.75rem;
-    color: #333;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    color: #2c3e50;
   }
 
   .search-input {
-    width: 100%;
-    padding: 0.6rem;
-    margin-bottom: 1rem;
+    width: 50%;
+    padding: 0.7rem 1rem;
+    margin-bottom: 1.5rem;
     border: 1px solid #ccc;
-    border-radius: 6px;
+    border-radius: 8px;
     font-size: 1rem;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+      border-color: #4caf50;
+      outline: none;
+    }
   }
 
   .table-wrapper {
@@ -29,24 +35,33 @@
     table {
       width: 100%;
       border-collapse: collapse;
+      font-size: 0.95rem;
 
       thead {
-        background-color: #f7f7f7;
+        background-color: #f9fafb;
 
         th {
-          padding: 0.75rem;
+          padding: 0.75rem 1rem;
           text-align: left;
-          font-weight: bold;
+          font-weight: 600;
+          color: #444;
         }
       }
 
-      td {
-        padding: 0.6rem;
-        border-bottom: 1px solid #eee;
-      }
+      tbody {
+        tr {
+          transition: background-color 0.2s ease;
 
-      tbody tr:hover {
-        background-color: #f1f1f1;
+          &:hover {
+            background-color: #f4f6f8;
+          }
+
+          td {
+            padding: 0.6rem 1rem;
+            border-bottom: 1px solid #eee;
+            color: #555;
+          }
+        }
       }
     }
   }
