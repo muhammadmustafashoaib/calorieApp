@@ -1,24 +1,32 @@
-<nav class="navbar">
-  <div class="brand">🥗 CalorieTracker</div>
-  <div class="account">Account ⮟</div>
-</nav>
+<ng-container>
+  <!-- Show this if logged in -->
+  <nav class="navbar">
+    <div class="brand">🥗 CalorieTracker</div>
+    <div class="account">Account ⮟</div>
+  </nav>
 
-<div class="layout">
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <ul>
-      <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
-      <li><a routerLink="/diary" routerLinkActive="active">Diary</a></li>
-      <li><a routerLink="/trends" routerLinkActive="active">Trends</a></li>
-      <li><a routerLink="/foods" routerLinkActive="active">Foods</a></li>
-      <li><a routerLink="/plans" routerLinkActive="active">Plans</a></li>
-      <li><a routerLink="/support" routerLinkActive="active">Support</a></li>
-      <li><a routerLink="/about" routerLinkActive="active">About</a></li>
-    </ul>
-  </aside>
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <ul>
+        <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+        <li><a routerLink="/diary" routerLinkActive="active">Diary</a></li>
+        <li><a routerLink="/trends" routerLinkActive="active">Trends</a></li>
+        <li><a routerLink="/foods" routerLinkActive="active">Foods</a></li>
+        <li><a routerLink="/plans" routerLinkActive="active">Plans</a></li>
+        <li><a routerLink="/support" routerLinkActive="active">Support</a></li>
+        <li><a routerLink="/about" routerLinkActive="active">About</a></li>
+      </ul>
+    </aside>
 
-  <!-- Main Routed Content -->
-  <main class="content">
-    <router-outlet></router-outlet>
-  </main>
-</div>
+    <!-- Main Content -->
+    <main class="content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</ng-container>
+
+<!-- Show this if NOT logged in -->
+<ng-template #loginPage>
+  <router-outlet></router-outlet>
+</ng-template>

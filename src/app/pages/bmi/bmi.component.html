@@ -1,6 +1,8 @@
-<div class="bmi-container">
-  <h2>📊 BMI Calculator</h2>
-  <p>Calculate your Body Mass Index (BMI)</p>
+<div class="bmi-container animate-fade-in">
+  <header class="header">
+    <h1>📊 BMI Calculator</h1>
+    <p>Know your Body Mass Index and assess your health</p>
+  </header>
 
   <form class="bmi-form">
     <div class="form-group">
@@ -11,7 +13,7 @@
           id="weight"
           [(ngModel)]="weight"
           name="weight"
-          placeholder="e.g 70"
+          placeholder="Enter weight"
         />
         <select [(ngModel)]="weightUnit" name="weightUnit">
           <option value="kg">kg</option>
@@ -29,7 +31,7 @@
             id="height"
             [(ngModel)]="heightCm"
             name="heightCm"
-            placeholder="e.g 170"
+            placeholder="Enter height"
           />
         </ng-container>
         <ng-template #feetInches>
@@ -54,11 +56,13 @@
     </div>
   </form>
 
-  <div class="bmi-result" *ngIf="bmi">
-    <h3>Your BMI: <span>{{ bmi.toFixed(1) }}</span></h3>
-    <p *ngIf="bmi < 18.5" class="status underweight">Underweight</p>
-    <p *ngIf="bmi >= 18.5 && bmi < 24.9" class="status normal">Normal weight</p>
-    <p *ngIf="bmi >= 25 && bmi < 29.9" class="status overweight">Overweight</p>
-    <p *ngIf="bmi >= 30" class="status obese">Obese</p>
+  <div class="bmi-result animate-slide-up" *ngIf="bmi">
+    <h2>
+      Your BMI: <span>{{ bmi.toFixed(1) }} <small>kg/m²</small></span>
+    </h2>
+    <p *ngIf="bmi < 18.5" class="status underweight">⚠️ Underweight</p>
+    <p *ngIf="bmi >= 18.5 && bmi < 24.9" class="status normal">✅ Normal</p>
+    <p *ngIf="bmi >= 25 && bmi < 29.9" class="status overweight">⚠️ Overweight</p>
+    <p *ngIf="bmi >= 30" class="status obese">🚨 Obese</p>
   </div>
 </div>

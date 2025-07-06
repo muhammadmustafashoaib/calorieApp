@@ -9,100 +9,63 @@
   />
 
   <div class="table-wrapper">
-    <h3>🥦 Vegetables</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Food</th>
-          <th>Calories</th>
-          <th>Carbs</th>
-          <th>Protein</th>
-          <th>Fat</th>
-          <th>Fiber</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let food of vegetables">
-          <td>{{ food.name }}</td>
-          <td>{{ food.calories }} kcal</td>
-          <td>{{ food.carbs }} g</td>
-          <td>{{ food.protein }} g</td>
-          <td>{{ food.fat }} g</td>
-          <td>{{ food.fiber }} g</td>
-        </tr>
-      </tbody>
-    </table>
+    <ng-container *ngIf="searchTerm; else categorizedView">
+      <h3>🔍 Search Results</h3>
 
-    <h3 style="margin-top: 10px;">🍗 Proteins / Meat</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Food</th>
-          <th>Calories</th>
-          <th>Carbs</th>
-          <th>Protein</th>
-          <th>Fat</th>
-          <th>Fiber</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let food of proteins">
-          <td>{{ food.name }}</td>
-          <td>{{ food.calories }} kcal</td>
-          <td>{{ food.carbs }} g</td>
-          <td>{{ food.protein }} g</td>
-          <td>{{ food.fat }} g</td>
-          <td>{{ food.fiber }} g</td>
-        </tr>
-      </tbody>
-    </table>
+      <table *ngIf="filteredFoods.length > 0; else noResults">
+        <thead>
+          <tr>
+            <th>Food</th>
+            <th>Calories</th>
+            <th>Carbs</th>
+            <th>Protein</th>
+            <th>Fat</th>
+            <th>Fiber</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let food of filteredFoods">
+            <td>{{ food.name }}</td>
+            <td>{{ food.calories }} kcal</td>
+            <td>{{ food.carbs }} g</td>
+            <td>{{ food.protein }} g</td>
+            <td>{{ food.fat }} g</td>
+            <td>{{ food.fiber }} g</td>
+          </tr>
+        </tbody>
+      </table>
 
-    <h3 style="margin-top: 1%;">🍛 Pakistani Foods</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Food</th>
-          <th>Calories</th>
-          <th>Carbs</th>
-          <th>Protein</th>
-          <th>Fat</th>
-          <th>Fiber</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let food of pakistaniMain">
-          <td>{{ food.name }}</td>
-          <td>{{ food.calories }} kcal</td>
-          <td>{{ food.carbs }} g</td>
-          <td>{{ food.protein }} g</td>
-          <td>{{ food.fat }} g</td>
-          <td>{{ food.fiber }} g</td>
-        </tr>
-      </tbody>
-    </table>
+      <ng-template #noResults>
+        <p style="text-align: center; color: #888;">No matching food found.</p>
+      </ng-template>
+    </ng-container>
 
-    <h3 style="margin-top: 1%;">🍎 Fruits</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Food</th>
-          <th>Calories</th>
-          <th>Carbs</th>
-          <th>Protein</th>
-          <th>Fat</th>
-          <th>Fiber</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let food of fruits">
-          <td>{{ food.name }}</td>
-          <td>{{ food.calories }} kcal</td>
-          <td>{{ food.carbs }} g</td>
-          <td>{{ food.protein }} g</td>
-          <td>{{ food.fat }} g</td>
-          <td>{{ food.fiber }} g</td>
-        </tr>
-      </tbody>
-    </table>
+    <ng-template #categorizedView>
+      <ng-container *ngFor="let category of categories">
+        <h3>{{ category.icon }} {{ category.name }}</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Food</th>
+              <th>Calories</th>
+              <th>Carbs</th>
+              <th>Protein</th>
+              <th>Fat</th>
+              <th>Fiber</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let food of category.items">
+              <td>{{ food.name }}</td>
+              <td>{{ food.calories }} kcal</td>
+              <td>{{ food.carbs }} g</td>
+              <td>{{ food.protein }} g</td>
+              <td>{{ food.fat }} g</td>
+              <td>{{ food.fiber }} g</td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+    </ng-template>
   </div>
 </div>
