@@ -1,34 +1,44 @@
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-
 <div class="notes-container">
   <h3>📝 Notes</h3>
 
-  <div class="add-note">
-    <textarea
-      [(ngModel)]="newNoteText"
-      placeholder="Write a note"
-      rows="2"
-    ></textarea>
-    <button (click)="addNote()" [disabled]="!newNoteText.trim()">Add Note</button>
+  <div class="filter-row">
+    <label for="filterDate">📅 Filter by date:</label>
+    <input type="date" id="filterDate" [formControl]="filterDateControl" />
   </div>
 
+  <form [formGroup]="noteForm" class="add-note" (ngSubmit)="addNote()">
+    <div class="note-input-wrapper">
+      <textarea
+        formControlName="text"
+        placeholder="Write a thoughtful note…"
+        rows="2"
+      ></textarea>
+    </div>
+    <button type="submit" [disabled]="noteForm.invalid">
+      ➕ Add Note
+    </button>
+  </form>
+
   <ul class="notes-list">
-    <li *ngFor="let note of notes">
+    <li *ngFor="let note of filteredNotes()">
       <div *ngIf="!note.editing" class="note-display">
-        <span>{{ note.text }}</span>
+        <div>
+          <div class="note-text">{{ note.text }}</div>
+          <div class="note-date">{{ note.date | date: 'mediumDate' }}</div>
+        </div>
         <div class="actions">
-          <button (click)="enableEdit(note)">✏️ Edit</button>
-          <button (click)="deleteNote(note.id)">🗑️ Delete</button>
+          <button (click)="enableEdit(note)">✏️</button>
+          <button (click)="deleteNote(note.id)">🗑️</button>
         </div>
       </div>
 
-      <div *ngIf="note.editing" class="note-edit">
-        <textarea [(ngModel)]="note.text" rows="2"></textarea>
-        <div class="actions">
-          <button (click)="saveEdit(note)">💾 Save</button>
-          <button (click)="cancelEdit(note)">❌ Cancel</button>
-        </div>
-      </div>
+    <form *ngIf="note.editing" [formGroup]="note.editForm!" class="note-edit">
+  <textarea formControlName="text" rows="2"></textarea>
+  <div class="actions">
+    <button type="button" (click)="saveEdit(note)">💾 Save</button>
+    <button type="button" (click)="cancelEdit(note)">❌ Cancel</button>
+  </div>
+</form>
     </li>
   </ul>
 </div>

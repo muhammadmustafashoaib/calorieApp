@@ -10,7 +10,7 @@ import { AddfoodComponent } from './pages/addfood/addfood.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { SupportComponent } from './pages/support/support.component';
 import { AboutComponent } from './pages/about/about.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgChartsModule } from 'ng2-charts';
 import { TrendsComponent } from './pages/trends/trends.component';
 import { FoodsComponent } from './pages/foods/foods.component';
@@ -39,7 +39,7 @@ import { NotesComponent } from './pages/notes/notes.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    
+    ReactiveFormsModule,
   FormsModule,
   NgChartsModule
   ],
