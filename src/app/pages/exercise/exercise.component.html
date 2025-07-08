@@ -1,66 +1,109 @@
 <div class="exercise-container">
-  <div class="header">
+  <header class="header">
     <h2>🏋️ Exercise Tracker</h2>
-    <p class="subtitle">Log your exercises & track burned calories.</p>
-  </div>
+    <p class="subtitle">Log your exercises &amp; track burned calories.</p>
+  </header>
 
-  <div class="card">
-    <form class="exercise-form" (ngSubmit)="logExercise()">
+  <section class="card">
+    <form class="exercise-form" (ngSubmit)="logExercise()" novalidate>
       <div class="form-group">
         <label for="exercise">Exercise</label>
-        <select [(ngModel)]="selectedExercise" name="exercise" id="exercise" required>
-          <option [ngValue]="null" disabled>Select Exercise</option>
-          <option *ngFor="let e of exercisesList" [ngValue]="e">{{ e.name }}</option>
-        </select>
+     <select
+  id="exercise"
+  name="exercise"
+  [(ngModel)]="selectedExercise"
+  required
+>
+  <option [ngValue]="null" disabled>Select Exercise</option>
+  <option *ngFor="let e of exercisesList" [ngValue]="e">
+    {{ e.name }}
+  </option>
+</select>
       </div>
 
       <div class="form-group">
         <label for="duration">Duration</label>
-        <select [(ngModel)]="duration" name="duration" id="duration" required>
-          <option [ngValue]="null" disabled>Select Duration</option>
-          <option *ngFor="let d of durationsList" [ngValue]="d">{{ d }} minutes</option>
+        <select id="duration" name="duration" [(ngModel)]="duration" required>
+          <option [ngValue]="null" disabled>Duration</option>
+          <option *ngFor="let d of durationsList" [ngValue]="d">
+            {{ d }} minutes
+          </option>
         </select>
       </div>
 
-      <button type="submit" class="btn-primary" [disabled]="!selectedExercise || !duration">
-        {{ editingIndex !== null ? '✏️ Update Exercise' : '➕ Log Exercise' }}
+      <button
+        type="submit"
+        class="btn-primary"
+        [disabled]="!selectedExercise || !duration"
+        [attr.aria-disabled]="(!selectedExercise || !duration).toString()"
+      >
+        {{ editingIndex !== null ? "✏️ Update Exercise" : "➕ Log Exercise" }}
       </button>
     </form>
 
-    <div class="calories-preview" *ngIf="selectedExercise && duration">
+    <div
+      class="calories-preview"
+      *ngIf="selectedExercise && duration"
+      aria-live="polite"
+    >
       <p>
         🔥 <strong>{{ calculatedCalories }}</strong> kcal burned for
         <strong>{{ duration }}</strong> min of
         <strong>{{ selectedExercise.name }}</strong>
       </p>
     </div>
-  </div>
+  </section>
 
-  <div class="logged-list" *ngIf="loggedExercises.length > 0">
-    <h3>📋 Logged Exercises</h3>
-    <div class="log-cards">
+  <section class="logged-list" *ngIf="loggedExercises.length > 0">
+    <h3 class="logged-title">
+      <span class="logged-icon">📋</span>
+      Logged Exercises
+    </h3>
+    <div class="log-card-list">
       <div class="log-card" *ngFor="let ex of loggedExercises; let i = index">
-        <p><strong>{{ ex.name }}</strong></p>
-        <p>{{ ex.duration }} min • {{ ex.calories }} kcal</p>
-        <div class="log-actions">
-          <button class="edit-btn" (click)="editExercise(i)">✏️ Edit</button>
-          <button class="remove-btn" (click)="removeExercise(i)">🗑️ Remove</button>
+        <div class="log-card-info">
+          <div class="log-card-name"><strong>{{ ex.name }}</strong></div>
+          <div class="log-card-meta">
+            {{ ex.duration }} min &bull; {{ ex.calories }} kcal
+          </div>
+        </div>
+        <div class="log-card-actions">
+      <div class="log-card-actions">
+  <button
+    class="action-btn"
+    (click)="editExercise(i)"
+    [attr.aria-label]="'Edit ' + ex.name"
+  >
+    <span class="emoji" style="color:#f57c00;">&#9998;</span>
+  </button>
+  <button
+    class="action-btn"
+    (click)="removeExercise(i)"
+    [attr.aria-label]="'Remove ' + ex.name"
+  >
+    <span class="emoji" style="color:#757575;">&#10060;</span>
+  </button>
+</div>
+
         </div>
       </div>
     </div>
 
-    <div class="summary">
-      <h4>✅ Totals</h4>
-      <div class="summary-grid">
-        <div class="summary-item">
-          <p>Total Time</p>
-          <strong>{{ totalTime }} minutes</strong>
+    <div class="totals-section">
+      <h4 class="totals-title">
+        <span class="totals-icon">✅</span>
+        Totals
+      </h4>
+      <div class="totals-cards">
+        <div class="totals-card">
+          <div class="totals-label">Total Time</div>
+          <div class="totals-value">{{ totalTime }} minutes</div>
         </div>
-        <div class="summary-item">
-          <p>Total Calories Burned</p>
-          <strong>{{ totalCalories }} kcal</strong>
+        <div class="totals-card">
+          <div class="totals-label">Total Calories Burned</div>
+          <div class="totals-value">{{ totalCalories }} kcal</div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </div>
