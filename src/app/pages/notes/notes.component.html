@@ -1,5 +1,8 @@
 <div class="notes-container">
-  <h3>📝 Notes</h3>
+  <h3 class="notes-title">
+    <span class="notes-icon" style="text-align: center;">📝</span>
+    Notes
+  </h3>
 
   <div class="filter-row">
     <label for="filterDate">📅 Filter by date:</label>
@@ -7,38 +10,56 @@
   </div>
 
   <form [formGroup]="noteForm" class="add-note" (ngSubmit)="addNote()">
-    <div class="note-input-wrapper">
-      <textarea
-        formControlName="text"
-        placeholder="Write a thoughtful note…"
-        rows="2"
-      ></textarea>
-    </div>
-    <button type="submit" [disabled]="noteForm.invalid">
-      ➕ Add Note
-    </button>
+  <div class="note-input-wrapper">
+  <textarea
+    formControlName="text"
+    placeholder="Write a thoughtful note..."
+    rows="2"
+    style="width: 90%;"
+  ></textarea>
+
+  <button
+    type="submit"
+    [disabled]="noteForm.invalid"
+    class="add-note-btn"
+  >
+    +
+  </button>
+</div>
+
   </form>
 
   <ul class="notes-list">
-    <li *ngFor="let note of filteredNotes()">
+    <li *ngFor="let note of filteredNotes()" [@fadeSlideIn]>
       <div *ngIf="!note.editing" class="note-display">
         <div>
           <div class="note-text">{{ note.text }}</div>
-          <div class="note-date">{{ note.date | date: 'mediumDate' }}</div>
+<div class="note-date">{{ note.date | date: 'd MMM yyyy' }}</div>
         </div>
         <div class="actions">
-          <button (click)="enableEdit(note)">✏️</button>
-          <button (click)="deleteNote(note.id)">🗑️</button>
+      <div class="actions">
+  <button (click)="enableEdit(note)" [attr.aria-label]="'Edit note'">
+    <span class="emoji">✏️</span>
+  </button>
+  <button (click)="deleteNote(note.id)" [attr.aria-label]="'Delete note'">
+    <span class="emoji">🗑️</span>
+  </button>
+</div>
+
         </div>
       </div>
 
-    <form *ngIf="note.editing" [formGroup]="note.editForm!" class="note-edit">
-  <textarea formControlName="text" rows="2"></textarea>
-  <div class="actions">
-    <button type="button" (click)="saveEdit(note)">💾 Save</button>
-    <button type="button" (click)="cancelEdit(note)">❌ Cancel</button>
-  </div>
-</form>
+      <form *ngIf="note.editing" [formGroup]="note.editForm!" class="note-edit">
+        <textarea formControlName="text" rows="2"></textarea>
+        <div class="actions">
+          <button type="button" (click)="saveEdit(note)">
+            <span class="emoji">💾</span>
+          </button>
+          <button type="button" (click)="cancelEdit(note)">
+            <span class="emoji">❌</span>
+          </button>
+        </div>
+      </form>
     </li>
   </ul>
 </div>
