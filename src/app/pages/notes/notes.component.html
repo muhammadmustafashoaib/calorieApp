@@ -30,7 +30,7 @@
   </form>
 
   <ul class="notes-list">
-    <li *ngFor="let note of filteredNotes()" [@fadeSlideIn]>
+<li *ngFor="let note of filteredNotes()" [@fadeSlide]>
       <div *ngIf="!note.editing" class="note-display">
         <div>
           <div class="note-text">{{ note.text }}</div>

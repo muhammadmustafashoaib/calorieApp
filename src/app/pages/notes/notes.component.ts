@@ -41,22 +41,7 @@ export class NotesComponent {
     });
   }
 
-  addNote(): void {
-    if (this.noteForm.invalid) return;
-
-    const text: string = this.noteForm.value.text.trim();
-
-    if (!text) return;
-
-    this.notes.push({
-      id: this.idCounter++,
-      text,
-      date: new Date(),
-      editing: false
-    });
-
-    this.noteForm.reset();
-  }
+  
 
   deleteNote(noteId: number): void {
     this.notes = this.notes.filter(n => n.id !== noteId);
@@ -97,4 +82,26 @@ export class NotesComponent {
       n.date.toDateString() === selectedDate.toDateString()
     );
   }
+  addNote(): void {
+  if (this.noteForm.invalid) return;
+
+  const text: string = this.noteForm.value.text.trim();
+
+  if (!text) return;
+
+  this.notes.push({
+    id: this.idCounter++,
+    text,
+    date: new Date(),
+    editing: false
+  });
+
+  this.noteForm.reset();
+
+  setTimeout(() => {
+    const el = document.querySelector('.notes-list');
+    el?.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
+  });
+}
+
 }
