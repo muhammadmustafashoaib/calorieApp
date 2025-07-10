@@ -7,9 +7,11 @@ import { ChartData, ChartOptions, ChartType } from 'chart.js';
   styleUrls: ['./diary.component.scss']
 })
 export class DiaryComponent {
-   selectedFoodName: string = '';
+  selectedDate: string = this.formatDate(new Date());
+  selectedFoodName: string = '';
   selectedFood: any = null;
-  foodEntries: any[] = [];
+
+  diaryByDate: { [date: string]: any[] } = {};
 
   foodOptions = [
     { name: 'Boiled Egg', calories: 78, carbs: 0.6, protein: 6.3, fat: 5.3, fiber: 0 },
@@ -34,37 +36,40 @@ export class DiaryComponent {
     { name: 'Sweet Potato (1 medium)', calories: 103, carbs: 24, protein: 2.3, fat: 0.2, fiber: 3.8 }
   ];
 
-  // Chart Setup
-chartType: ChartType = 'doughnut';
+  chartType: ChartType = 'doughnut';
 
   chartData: ChartData<'doughnut'> = {
-  labels: ['Carbs', 'Protein', 'Fat'],
-  datasets: [
-    {
-      data: [0, 0, 0],
-      backgroundColor: ['#42A5F5', '#66BB6A', '#FFA726'],
-      label: 'Macros Breakdown'
-    }
-  ]
-};
-
+    labels: ['Carbs', 'Protein', 'Fat'],
+    datasets: [
+      {
+        data: [0, 0, 0],
+        backgroundColor: ['#42A5F5', '#66BB6A', '#FFA726'],
+        label: 'Macros Breakdown'
+      }
+    ]
+  };
 
   chartOptions: ChartOptions = {
     responsive: true,
     plugins: {
-      legend: {
-        position: 'top'
-      }
+      legend: { position: 'top' }
     }
   };
 
-  onFoodSelect() {
+  get foodEntries(): any[] {
+    return this.diaryByDate[this.selectedDate] || [];
+  }
+
+  searchFood() {
     this.selectedFood = this.foodOptions.find(food => food.name === this.selectedFoodName);
   }
 
   addSelectedFood() {
     if (this.selectedFood) {
-      this.foodEntries.push({ ...this.selectedFood });
+      if (!this.diaryByDate[this.selectedDate]) {
+        this.diaryByDate[this.selectedDate] = [];
+      }
+      this.diaryByDate[this.selectedDate].push({ ...this.selectedFood });
       this.selectedFood = null;
       this.selectedFoodName = '';
       this.updateChartData();
@@ -72,8 +77,10 @@ chartType: ChartType = 'doughnut';
   }
 
   removeFood(index: number) {
-    this.foodEntries.splice(index, 1);
-    this.updateChartData();
+    if (this.diaryByDate[this.selectedDate]) {
+      this.diaryByDate[this.selectedDate].splice(index, 1);
+      this.updateChartData();
+    }
   }
 
   getTotal(key: 'calories' | 'carbs' | 'protein' | 'fat' | 'fiber'): number {
@@ -86,5 +93,13 @@ chartType: ChartType = 'doughnut';
     const fat = this.getTotal('fat');
 
     this.chartData.datasets[0].data = [carbs, protein, fat];
+  }
+
+  onDateChange() {
+    this.updateChartData();
+  }
+
+  private formatDate(date: Date): string {
+    return date.toISOString().split('T')[0];
   }
 }
