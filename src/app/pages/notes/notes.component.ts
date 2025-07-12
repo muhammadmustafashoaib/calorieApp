@@ -28,11 +28,8 @@ interface Note {
 })
 export class NotesComponent {
   notes: Note[] = [];
-
   noteForm: FormGroup;
-
   filterDateControl: FormControl = new FormControl('');
-
   private idCounter = 1;
 
   constructor(private fb: FormBuilder) {
@@ -40,8 +37,6 @@ export class NotesComponent {
       text: ['', [Validators.required, Validators.minLength(1)]]
     });
   }
-
-  
 
   deleteNote(noteId: number): void {
     this.notes = this.notes.filter(n => n.id !== noteId);
@@ -58,7 +53,6 @@ export class NotesComponent {
     if (!note.editForm || note.editForm.invalid) return;
 
     const updatedText: string = note.editForm.value.text.trim();
-
     if (!updatedText) return;
 
     note.text = updatedText;
@@ -73,35 +67,32 @@ export class NotesComponent {
 
   filteredNotes(): Note[] {
     const dateValue = this.filterDateControl.value;
-
     if (!dateValue) return this.notes;
 
     const selectedDate = new Date(dateValue);
-
     return this.notes.filter(n =>
       n.date.toDateString() === selectedDate.toDateString()
     );
   }
+
   addNote(): void {
-  if (this.noteForm.invalid) return;
+    if (this.noteForm.invalid) return;
 
-  const text: string = this.noteForm.value.text.trim();
+    const text: string = this.noteForm.value.text.trim();
+    if (!text) return;
 
-  if (!text) return;
+    this.notes.push({
+      id: this.idCounter++,
+      text,
+      date: new Date(),
+      editing: false
+    });
 
-  this.notes.push({
-    id: this.idCounter++,
-    text,
-    date: new Date(),
-    editing: false
-  });
+    this.noteForm.reset();
 
-  this.noteForm.reset();
-
-  setTimeout(() => {
-    const el = document.querySelector('.notes-list');
-    el?.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
-  });
-}
-
+    setTimeout(() => {
+      const el = document.querySelector('.notes-list');
+      el?.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
+    });
+  }
 }
