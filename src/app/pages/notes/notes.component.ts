@@ -65,15 +65,21 @@ export class NotesComponent {
     note.editForm = undefined;
   }
 
-  filteredNotes(): Note[] {
-    const dateValue = this.filterDateControl.value;
-    if (!dateValue) return this.notes;
+filteredNotes(): Note[] {
+  const dateValue = this.filterDateControl.value;
 
-    const selectedDate = new Date(dateValue);
-    return this.notes.filter(n =>
-      n.date.toDateString() === selectedDate.toDateString()
-    );
-  }
+  if (!dateValue) return this.notes;
+
+  const selectedDate = new Date(dateValue);
+  selectedDate.setHours(0, 0, 0, 0);
+
+  return this.notes.filter(n => {
+    const noteDate = new Date(n.date);
+    noteDate.setHours(0, 0, 0, 0);
+    return noteDate.getTime() === selectedDate.getTime();
+  });
+}
+
 
   addNote(): void {
     if (this.noteForm.invalid) return;
