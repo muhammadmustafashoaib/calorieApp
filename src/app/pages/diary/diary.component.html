@@ -2,20 +2,21 @@
   <h2>🍽️ Food Diary</h2>
 
   <!-- Date Picker -->
+   <div style="display: flex;">
   <div class="date-select">
     <label for="date">📅 Select Date:</label>
-    <input id="date" type="date" [(ngModel)]="selectedDate" (change)="onDateChange()">
+    <input id="date" type="date" [(ngModel)]="selectedDate" (change)="onDateChange()" style="font-family: auto;">
   </div>
 
   <!-- Food Dropdown + Search Button -->
-  <div class="food-select">
+  <div class="food-select" style="margin: auto;">
     <select [(ngModel)]="selectedFoodName">
       <option value="" disabled selected>Select a food</option>
       <option *ngFor="let food of foodOptions" [value]="food.name">{{ food.name }}</option>
     </select>
     <button (click)="searchFood()" style="background-color: rgb(49, 206, 49); border-radius:30%;">Enter</button>
   </div>
-
+</div>
   <!-- Selected Food Info -->
   <div class="food-details" *ngIf="selectedFood">
     <p><strong>Calories:</strong> {{ selectedFood.calories }} kcal</p>
