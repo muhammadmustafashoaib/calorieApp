@@ -14,26 +14,25 @@ export class DiaryComponent {
   selectedCategoryIndex: number = 0;
 
   categories = [
-    { name: 'Uncategorized', expanded: false, foods: ['Example Food 1', 'Example Food 2'] },
-    { name: 'Breakfast', expanded: false, foods: ['Eggs', 'Toast'] },
-    { name: 'Lunch', expanded: false, foods: ['Chicken Salad', 'Rice'] },
-    { name: 'Dinner', expanded: false, foods: ['Steak', 'Vegetables'] },
-    { name: 'Snacks', expanded: false, foods: ['Fruit', 'Nuts'] }
+    { name: 'Breakfast', expanded: false, foods: [''] },
+    { name: 'Lunch', expanded: false, foods: [''] },
+    { name: 'Dinner', expanded: false, foods: [''] },
+    { name: 'Snacks', expanded: false, foods: [''] }
   ];
 
   keys: NutrientKey[] = ['energy', 'protein', 'carbs', 'fat'];
 
   energySummary = {
     consumed: 0,
-    expenditure: 1778,
-    remaining: 1903
+    expenditure: '',
+    remaining: ''
   };
 
   targets: Record<NutrientKey, number> = {
-    energy: 1903,
-    protein: 118.9,
-    carbs: 214.1,
-    fat: 63.4
+    energy: 0,
+    protein: 0,
+    carbs: 0,
+    fat: 0
   };
 
   consumed: Record<NutrientKey, number> = {
