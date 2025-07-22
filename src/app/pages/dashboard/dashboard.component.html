@@ -1,61 +1,97 @@
-<section class="dashboard">
-  <h2>🍴 Your Dashboard</h2>
+<section class="max-w-[1200px] mx-auto p-4">
+  <h2 class="text-center text-2xl text-gray-800 mb-4 animate-fade-in">🍴 Your Dashboard</h2>
 
   <!-- Quick Add Section -->
-<div class="quick-add">
-  <a routerLink="/foods" class="btn">🍎 Food</a>
-  <a routerLink="/exercise" class="btn">🏃 Exercise</a>
-  <a routerLink="/bmi" class="btn">🧬 BMI Calculator</a>
-  <a routerLink="/notes" class="btn">📝 Note</a>
-</div>
+  <div class="flex flex-wrap justify-center gap-4 mb-8">
+    <a routerLink="/foods"
+       class="inline-block px-5 py-2.5 bg-green-600 text-white text-sm rounded-md transition duration-300 ease-in-out hover:bg-green-700 hover:scale-105">🍎 Food</a>
+    <a routerLink="/exercise"
+       class="inline-block px-5 py-2.5 bg-green-600 text-white text-sm rounded-md transition duration-300 ease-in-out hover:bg-green-700 hover:scale-105">🏃 Exercise</a>
+    <a routerLink="/bmi"
+       class="inline-block px-5 py-2.5 bg-green-600 text-white text-sm rounded-md transition duration-300 ease-in-out hover:bg-green-700 hover:scale-105">🧬 BMI Calculator</a>
+    <a routerLink="/notes"
+       class="inline-block px-5 py-2.5 bg-green-600 text-white text-sm rounded-md transition duration-300 ease-in-out hover:bg-green-700 hover:scale-105">📝 Note</a>
+  </div>
 
   <!-- Card Grid -->
-  <div class="card-grid">
+  <div class="grid gap-6 grid-cols-[repeat(auto-fit,_minmax(280px,_1fr))]">
 
-    <div class="card welcome">
-      <img src="https://images.unsplash.com/photo-1489743342057-3448cc7c3bb9?q=80&w=712&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Welcome">
-      <h3>Welcome, Mustafa Shoaib!</h3>
-      <p>Start your journey by logging your first food entry.</p>
-      <button>Log Food</button>
+    <!-- Welcome Card -->
+    <div
+      class="bg-white rounded-xl shadow-md p-4 flex flex-col items-center text-center overflow-y-auto transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg">
+      <img src="https://images.unsplash.com/photo-1489743342057-3448cc7c3bb9?q=80&w=712&auto=format&fit=crop"
+           alt="Welcome"
+           class="w-full h-[150px] object-cover rounded-lg mb-3 transition-transform duration-300 hover:scale-105">
+      <h3 class="text-lg text-gray-800 mb-2">Welcome, Mustafa Shoaib!</h3>
+      <p class="text-sm text-gray-600 mb-4">Start your journey by logging your first food entry.</p>
+      <button
+        class="mt-auto px-3 py-2 text-sm bg-green-600 text-white rounded-md transition duration-300 hover:bg-green-700 hover:scale-105">Log Food</button>
     </div>
 
-    <div class="card ad">
-      <img src="https://media.istockphoto.com/id/2208477672/photo/elevated-heart-rate-notification-in-red-color-on-the-smartphone-screen-close-up-backdrop.jpg?s=1024x1024&w=is&k=20&c=v-0wnDwMwOhKEUmiMT6CwjIplvBAUCczF7Tb3YlVELA=" alt="AI">
-      <h4>CalorieGPT AI</h4>
-      <p>Power your app with AI nutrition insights.</p>
-      <button>Explore Features</button>
+    <!-- AI Card -->
+    <div
+      class="bg-white rounded-xl shadow-md p-4 flex flex-col items-center text-center overflow-y-auto transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg">
+      <img src="https://media.istockphoto.com/id/2208477672/photo/elevated-heart-rate-notification-in-red-color-on-the-smartphone-screen-close-up-backdrop.jpg?s=1024x1024&w=is&k=20&c=v-0wnDwMwOhKEUmiMT6CwjIplvBAUCczF7Tb3YlVELA="
+           alt="AI"
+           class="w-full h-[150px] object-cover rounded-lg mb-3 transition-transform duration-300 hover:scale-105">
+      <h4 class="text-lg text-gray-800 mb-2">CalorieGPT AI</h4>
+      <p class="text-sm text-gray-600 mb-4">Power your app with AI nutrition insights.</p>
+      <button
+        class="mt-auto px-3 py-2 text-sm bg-green-600 text-white rounded-md transition duration-300 hover:bg-green-700 hover:scale-105">Explore Features</button>
     </div>
 
-    <div class="card fasting">
-      <img src="https://images.unsplash.com/photo-1613408324997-fe8106e837e5?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Fasting">
-      <h4>Fasting ✋</h4>
-      <p>No fasts yet.<br>Start one today!</p>
-      <button>New Fast</button>
+    <!-- Fasting Card -->
+    <div
+      class="bg-white rounded-xl shadow-md p-4 flex flex-col items-center text-center overflow-y-auto transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg">
+      <img src="https://images.unsplash.com/photo-1613408324997-fe8106e837e5?q=80&w=1074&auto=format&fit=crop"
+           alt="Fasting"
+           class="w-full h-[150px] object-cover rounded-lg mb-3 transition-transform duration-300 hover:scale-105">
+      <h4 class="text-lg text-gray-800 mb-2">Fasting ✋</h4>
+      <p class="text-sm text-gray-600 mb-4">No fasts yet.<br>Start one today!</p>
+      <button
+        class="mt-auto px-3 py-2 text-sm bg-green-600 text-white rounded-md transition duration-300 hover:bg-green-700 hover:scale-105">New Fast</button>
     </div>
 
-    <div class="card streaks">
-      <img src="https://images.unsplash.com/photo-1644530099027-5ddbce057580?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Streaks">
-      <h4>Your Streaks</h4>
-      <p>0-day streak. Start logging now!</p>
+    <!-- Streaks Card -->
+    <div
+      class="bg-white rounded-xl shadow-md p-4 flex flex-col items-center text-center overflow-y-auto transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg">
+      <img src="https://images.unsplash.com/photo-1644530099027-5ddbce057580?q=80&w=1170&auto=format&fit=crop"
+           alt="Streaks"
+           class="w-full h-[150px] object-cover rounded-lg mb-3 transition-transform duration-300 hover:scale-105">
+      <h4 class="text-lg text-gray-800 mb-2">Your Streaks</h4>
+      <p class="text-sm text-gray-600 mb-4">0-day streak. Start logging now!</p>
     </div>
 
-    <div class="card goal">
-      <img src="https://images.unsplash.com/photo-1725289571284-98f89d2cbba3?q=80&w=1228&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Weight Goal">
-      <h4>Weight Goal</h4>
-      <p>Goal: 55kg<br>Forecast: May 07, 2026</p>
-      <button>Log Weight</button>
+    <!-- Weight Goal -->
+    <div
+      class="bg-white rounded-xl shadow-md p-4 flex flex-col items-center text-center overflow-y-auto transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg">
+      <img src="https://images.unsplash.com/photo-1725289571284-98f89d2cbba3?q=80&w=1228&auto=format&fit=crop"
+           alt="Weight Goal"
+           class="w-full h-[150px] object-cover rounded-lg mb-3 transition-transform duration-300 hover:scale-105">
+      <h4 class="text-lg text-gray-800 mb-2">Weight Goal</h4>
+      <p class="text-sm text-gray-600 mb-4">Goal: 55kg<br>Forecast: May 07, 2026</p>
+      <button
+        class="mt-auto px-3 py-2 text-sm bg-green-600 text-white rounded-md transition duration-300 hover:bg-green-700 hover:scale-105">Log Weight</button>
     </div>
 
-    <div class="card chart">
-      <h4>Energy History (kcal)</h4>
-      <img src="https://images.unsplash.com/photo-1618392167319-93237a84325d?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Energy Chart">
-      <p>Your daily caloric intake trend over the past week is shown above.</p>
+    <!-- Energy Chart -->
+    <div
+      class="bg-white rounded-xl shadow-md p-4 flex flex-col items-center text-center overflow-y-auto transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg">
+      <h4 class="text-lg text-gray-800 mb-2">Energy History (kcal)</h4>
+      <img src="https://images.unsplash.com/photo-1618392167319-93237a84325d?q=80&w=687&auto=format&fit=crop"
+           alt="Energy Chart"
+           class="w-full h-[150px] object-cover rounded-lg mb-3 transition-transform duration-300 hover:scale-105">
+      <p class="text-sm text-gray-600">Your daily caloric intake trend over the past week is shown above.</p>
     </div>
 
-    <div class="card chart">
-      <h4>Weight Change</h4>
-      <img src="https://images.unsplash.com/photo-1522844990619-4951c40f7eda?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Weight Change Chart">
-      <p>Track your weight changes over time with this graph.</p>
+    <!-- Weight Change -->
+    <div
+      class="bg-white rounded-xl shadow-md p-4 flex flex-col items-center text-center overflow-y-auto transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg">
+      <h4 class="text-lg text-gray-800 mb-2">Weight Change</h4>
+      <img src="https://images.unsplash.com/photo-1522844990619-4951c40f7eda?q=80&w=1170&auto=format&fit=crop"
+           alt="Weight Change Chart"
+           class="w-full h-[150px] object-cover rounded-lg mb-3 transition-transform duration-300 hover:scale-105">
+      <p class="text-sm text-gray-600">Track your weight changes over time with this graph.</p>
     </div>
 
   </div>
