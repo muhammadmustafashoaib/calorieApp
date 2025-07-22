@@ -9,42 +9,41 @@ import { FoodService } from 'src/services/food.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
-  totalCalories = 0;
-  barChartType: ChartType = 'bar';
+export class DashboardComponent {
+   gender: 'male' | 'female' = 'male';
+  heightCm: number | '' = '';
+  heightFt: number | '' = '';
+  heightInch: number | '' = '';
+  weightKg: number | '' = '';
+  weightLbs: number | '' = '';
 
-  barChartData: ChartConfiguration<'bar'>['data'] = {
-    labels: ['Breakfast', 'Lunch', 'Dinner', 'Snack'],
-    datasets: [
-      {
-        data: [0, 0, 0, 0],
-        label: 'Calories by Meal',
-        backgroundColor: '#4caf50'
-      }
-    ]
-  };
+  results: { idealWeightKg: number; calories: number } | null = null;
 
-  barChartOptions: ChartConfiguration<'bar'>['options'] = {
-    responsive: true,
-    plugins: {
-      legend: { display: true },
-      title: { display: true, text: 'Calorie Breakdown by Meal' }
+  calculate() {
+    let heightInInches: number;
+
+    if (this.heightCm) {
+      heightInInches = this.heightCm / 2.54;
+    } else if (this.heightFt !== '' || this.heightInch !== '') {
+      heightInInches = (+this.heightFt || 0) * 12 + (+this.heightInch || 0);
+    } else {
+      return;
     }
-  };
 
-  constructor(private foodService: FoodService) {}
+    let currentWeightKg: number;
+    if (this.weightKg) {
+      currentWeightKg = +this.weightKg;
+    } else if (this.weightLbs) {
+      currentWeightKg = +this.weightLbs * 0.453592;
+    } else {
+      currentWeightKg = 0;
+    }
 
-  ngOnInit(): void {
-    const entries = this.foodService.getTodayEntries();
-    this.totalCalories = this.foodService.getTotalCaloriesToday();
+    const base = this.gender === 'male' ? 50 : 45.5;
+    const inchesOver5ft = Math.max(heightInInches - 60, 0);
+    const idealWeightKg = base + (inchesOver5ft * 2.3);
+    const calories = Math.round(idealWeightKg * 25);
 
-    const meals = ['breakfast', 'lunch', 'dinner', 'snack'];
-    const caloriesPerMeal = meals.map(meal =>
-      entries
-        .filter(e => e.mealType === meal)
-        .reduce((sum, e) => sum + e.calories, 0)
-    );
-
-    this.barChartData.datasets[0].data = caloriesPerMeal;
+    this.results = { idealWeightKg, calories };
   }
 }
