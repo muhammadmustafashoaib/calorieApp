@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +7,18 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'calorie-tracker';
+    isSidebarOpen = false;
+  isLargeScreen = false;
+
+  ngOnInit() {
+    this.onResize();
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.isLargeScreen = window.innerWidth >= 768;
+    if (this.isLargeScreen) {
+      this.isSidebarOpen = false; // hide toggle on desktop
+    }
+  }
 }

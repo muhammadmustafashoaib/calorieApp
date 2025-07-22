@@ -2,12 +2,29 @@
   <!-- Logged in -->
   <nav class="h-12 bg-green-600 text-white px-4 flex justify-between items-center shadow">
     <div class="font-bold text-lg tracking-wide">🥗 CalorieTracker</div>
-    <div class="text-sm cursor-pointer hover:text-green-200 transition">Account ⮟</div>
+
+    <!-- Hamburger on mobile -->
+    <button 
+      class="md:hidden text-white hover:text-green-200 transition" 
+      (click)="isSidebarOpen = !isSidebarOpen"
+    >
+      ☰
+    </button>
+
+    <div class="hidden md:block text-sm cursor-pointer hover:text-green-200 transition">
+      Account ⮟
+    </div>
   </nav>
 
   <div class="flex flex-col md:flex-row h-[calc(100vh-3rem)]">
     <!-- Sidebar -->
-    <aside class="w-full md:w-56 bg-gray-800 text-white flex flex-col py-4 px-2 space-y-2 shadow-md">
+    <aside
+      class="w-full md:w-56 bg-gray-800 text-white flex-col py-4 px-2 space-y-2 shadow-md transition-all duration-300"
+      [ngClass]="{
+        'flex': isSidebarOpen || isLargeScreen,
+        'hidden': !isSidebarOpen && !isLargeScreen
+      }"
+    >
       <ul class="space-y-1">
         <li>
           <a routerLink="/dashboard" routerLinkActive="bg-green-700"
