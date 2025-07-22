@@ -1,16 +1,16 @@
-<div class="max-w-xl mx-auto mt-8 p-6 bg-white rounded shadow-md font-sans space-y-6 animate-fade-in">
-  <h2 class="text-2xl font-bold text-green-700 text-center mb-4">
+<div class="max-w-xl mx-auto mt-8 p-6 bg-white rounded-xl shadow-lg font-sans space-y-6 transition-transform duration-300 hover:shadow-xl hover:-translate-y-1 animate-fade-in">
+  <h2 class="text-3xl font-extrabold text-green-700 text-center mb-4 tracking-wide">
     🧮 Calorie & Ideal Weight Calculator
   </h2>
 
   <!-- Gender -->
   <div class="flex gap-4 justify-center">
-    <label class="text-sm font-medium text-gray-600">
+    <label class="text-sm font-medium text-gray-700">
       Gender:
       <select
         [(ngModel)]="gender"
         (change)="clearResults()"
-        class="ml-2 px-3 py-1.5 border rounded shadow-sm text-sm text-gray-800 hover:border-green-400 focus:ring focus:ring-green-100 transition"
+        class="ml-2 px-3 py-1.5 border rounded shadow-sm text-sm text-gray-800 hover:border-green-500 focus:ring focus:ring-green-100 transition"
       >
         <option value="male">Male</option>
         <option value="female">Female</option>
@@ -19,75 +19,92 @@
   </div>
 
   <!-- Height -->
-  <div class="grid md:grid-cols-2 gap-4">
-    <label class="text-sm font-medium text-gray-600">
-      Height (cm):
-      <input
-        type="number"
-        [(ngModel)]="heightCm"
-        (input)="clearResults()"
-        class="w-full px-3 py-1.5 border rounded shadow-sm text-sm text-gray-800 hover:border-green-400 focus:ring focus:ring-green-100 transition"
-      />
-    </label>
-    <div class="flex gap-2">
+  <div>
+    <p class="text-sm text-gray-600 mb-1">Height</p>
+    <div class="flex gap-2 md:gap-4">
       <label class="text-sm font-medium text-gray-600 flex-1">
-        Height (ft):
         <input
           type="number"
-          [(ngModel)]="heightFt"
+          placeholder="cm"
+          [(ngModel)]="heightCm"
           (input)="clearResults()"
-          class="w-full px-3 py-1.5 border rounded shadow-sm text-sm text-gray-800 hover:border-green-400 focus:ring focus:ring-green-100 transition"
+          class="w-full px-3 py-1.5 border rounded shadow-sm text-sm text-gray-800 hover:border-green-500 focus:ring focus:ring-green-100 transition placeholder-gray-400"
         />
       </label>
+
+      <div class="flex flex-col justify-center text-xs text-gray-500 font-medium px-2">or</div>
+
+      <div class="flex gap-2 flex-1">
+        <label class="text-sm font-medium text-gray-600 flex-1">
+          <input
+            type="number"
+            placeholder="ft"
+            [(ngModel)]="heightFt"
+            (input)="clearResults()"
+            class="w-full px-3 py-1.5 border rounded shadow-sm text-sm text-gray-800 hover:border-green-500 focus:ring focus:ring-green-100 transition placeholder-gray-400"
+          />
+        </label>
+        <label class="text-sm font-medium text-gray-600 flex-1">
+          <input
+            type="number"
+            placeholder="in"
+            [(ngModel)]="heightInch"
+            (input)="clearResults()"
+            class="w-full px-3 py-1.5 border rounded shadow-sm text-sm text-gray-800 hover:border-green-500 focus:ring focus:ring-green-100 transition placeholder-gray-400"
+          />
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Weight -->
+  <div>
+    <p class="text-sm text-gray-600 mb-1">Weight</p>
+    <div class="flex gap-2 md:gap-4">
       <label class="text-sm font-medium text-gray-600 flex-1">
-        Height (in):
         <input
           type="number"
-          [(ngModel)]="heightInch"
+          placeholder="kg"
+          [(ngModel)]="weightKg"
           (input)="clearResults()"
-          class="w-full px-3 py-1.5 border rounded shadow-sm text-sm text-gray-800 hover:border-green-400 focus:ring focus:ring-green-100 transition"
+          class="w-full px-3 py-1.5 border rounded shadow-sm text-sm text-gray-800 hover:border-green-500 focus:ring focus:ring-green-100 transition placeholder-gray-400"
+        />
+      </label>
+
+      <div class="flex flex-col justify-center text-xs text-gray-500 font-medium px-2">or</div>
+
+      <label class="text-sm font-medium text-gray-600 flex-1">
+        <input
+          type="number"
+          placeholder="lbs"
+          [(ngModel)]="weightLbs"
+          (input)="clearResults()"
+          class="w-full px-3 py-1.5 border rounded shadow-sm text-sm text-gray-800 hover:border-green-500 focus:ring focus:ring-green-100 transition placeholder-gray-400"
         />
       </label>
     </div>
   </div>
 
-  <!-- Weight -->
-  <div class="grid md:grid-cols-2 gap-4">
-    <label class="text-sm font-medium text-gray-600">
-      Weight (kg):
-      <input
-        type="number"
-        [(ngModel)]="weightKg"
-        (input)="clearResults()"
-        class="w-full px-3 py-1.5 border rounded shadow-sm text-sm text-gray-800 hover:border-green-400 focus:ring focus:ring-green-100 transition"
-      />
-    </label>
-    <label class="text-sm font-medium text-gray-600">
-      Weight (lbs):
-      <input
-        type="number"
-        [(ngModel)]="weightLbs"
-        (input)="clearResults()"
-        class="w-full px-3 py-1.5 border rounded shadow-sm text-sm text-gray-800 hover:border-green-400 focus:ring focus:ring-green-100 transition"
-      />
-    </label>
-  </div>
-
   <div class="text-center">
     <button
       (click)="calculate()"
-      class="px-5 py-2 bg-green-600 text-white rounded shadow hover:bg-green-700 hover:scale-105 transition text-sm font-semibold tracking-wide"
+      class="px-6 py-2 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 hover:scale-105 transition-all duration-200 text-sm font-semibold tracking-wide"
     >
-      Calculate
+      ✨ Calculate
     </button>
   </div>
 
-  <div *ngIf="results" class="mt-4 p-4 bg-green-50 border-l-4 border-green-400 rounded shadow-sm">
+  <div
+    *ngIf="results"
+    class="mt-4 p-4 bg-green-50 border-l-4 border-green-500 rounded shadow-sm animate-fade-in"
+  >
     <p class="text-sm text-gray-700">
-      ✅ Ideal Weight: <span class="font-bold">{{ results.idealWeightKg }} kg</span>
+      ✅ <span class="font-semibold">Ideal Weight:</span>
+      <span class="font-bold text-green-700">{{ results.idealWeightKg }} kg</span>
     </p>
     <p class="text-sm text-gray-700">
-      🔥 Suggested Daily Calories: <span class="font-bold">{{ results.calories }} kcal</span>
+      🔥 <span class="font-semibold">Suggested Daily Calories:</span>
+      <span class="font-bold text-green-700">{{ results.calories }} kcal</span>
     </p>
   </div>
 </div>
