@@ -18,6 +18,7 @@ import { PlansComponent } from './pages/plans/plans.component';
 import { ExerciseComponent } from './pages/exercise/exercise.component';
 import { BMIComponent } from './pages/bmi/bmi.component';
 import { NotesComponent } from './pages/notes/notes.component';
+import { CalorieCalculatorComponent } from './calorie-calculator/calorie-calculator.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { NotesComponent } from './pages/notes/notes.component';
     PlansComponent,
     ExerciseComponent,
     BMIComponent,
-    NotesComponent
+    NotesComponent,
+    CalorieCalculatorComponent
   ],
   imports: [
     BrowserModule,

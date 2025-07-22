@@ -12,6 +12,7 @@ import { PlansComponent } from './pages/plans/plans.component';
 import { ExerciseComponent } from './pages/exercise/exercise.component';
 import { BMIComponent } from './pages/bmi/bmi.component';
 import { NotesComponent } from './pages/notes/notes.component';
+import { CalorieCalculatorComponent } from './calorie-calculator/calorie-calculator.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -26,7 +27,8 @@ const routes: Routes = [
   {path:'plans', component:PlansComponent},
   {path:'exercise', component:ExerciseComponent},
   {path:'bmi', component:BMIComponent},
-  {path:'notes', component:NotesComponent}
+  {path:'notes', component:NotesComponent},
+  {path:'calorie',component:CalorieCalculatorComponent}
 
 ];
 
