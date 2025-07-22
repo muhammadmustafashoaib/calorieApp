@@ -1,67 +1,73 @@
-<div class="foods-container">
-  <h2>🥗 Food Library</h2>
+<div class="max-w-4xl mx-auto my-8 p-6 bg-white rounded-2xl shadow-lg font-sans animate-fade-in space-y-6">
+  <h2 class="text-3xl font-bold text-center text-gray-800">🥗 Food Library</h2>
 
   <input
     type="text"
     [(ngModel)]="searchTerm"
     placeholder="🔍 Search for a food…"
-    class="search-input"
+    class="block w-full max-w-md mx-auto px-4 py-2 text-sm border border-gray-300 rounded-full shadow-inner focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-400 transition duration-300 placeholder:text-gray-400"
   />
 
-  <div class="table-wrapper">
-    <ng-container *ngIf="searchTerm; else categorizedView">
-      <h3>🔍 Search Results</h3>
+  <div class="overflow-x-auto space-y-4">
 
-      <table *ngIf="filteredFoods.length > 0; else noResults">
-        <thead>
+    <ng-container *ngIf="searchTerm; else categorizedView">
+      <h3 class="text-lg font-semibold text-gray-700 border-l-4 border-green-500 pl-2">🔍 Search Results</h3>
+
+      <table *ngIf="filteredFoods.length > 0; else noResults"
+        class="w-full text-sm border-collapse mt-2">
+        <thead class="bg-gray-100">
           <tr>
-            <th>Food</th>
-            <th>Calories</th>
-            <th>Carbs</th>
-            <th>Protein</th>
-            <th>Fat</th>
-            <th>Fiber</th>
+            <th class="px-4 py-2 text-left font-semibold text-gray-700">Food</th>
+            <th class="px-4 py-2 text-left font-semibold text-gray-700">Calories</th>
+            <th class="px-4 py-2 text-left font-semibold text-gray-700">Carbs</th>
+            <th class="px-4 py-2 text-left font-semibold text-gray-700">Protein</th>
+            <th class="px-4 py-2 text-left font-semibold text-gray-700">Fat</th>
+            <th class="px-4 py-2 text-left font-semibold text-gray-700">Fiber</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let food of filteredFoods">
-            <td>{{ food.name }}</td>
-            <td>{{ food.calories }} kcal</td>
-            <td>{{ food.carbs }} g</td>
-            <td>{{ food.protein }} g</td>
-            <td>{{ food.fat }} g</td>
-            <td>{{ food.fiber }} g</td>
+          <tr *ngFor="let food of filteredFoods"
+            class="hover:bg-green-50 transition-colors duration-200">
+            <td class="px-4 py-2 text-gray-600">{{ food.name }}</td>
+            <td class="px-4 py-2 text-gray-600">{{ food.calories }} kcal</td>
+            <td class="px-4 py-2 text-gray-600">{{ food.carbs }} g</td>
+            <td class="px-4 py-2 text-gray-600">{{ food.protein }} g</td>
+            <td class="px-4 py-2 text-gray-600">{{ food.fat }} g</td>
+            <td class="px-4 py-2 text-gray-600">{{ food.fiber }} g</td>
           </tr>
         </tbody>
       </table>
 
       <ng-template #noResults>
-        <p style="text-align: center; color: #888;">No matching food found.</p>
+        <p class="text-center text-sm text-gray-400 mt-4 animate-pulse">No matching food found.</p>
       </ng-template>
     </ng-container>
 
     <ng-template #categorizedView>
       <ng-container *ngFor="let category of categories">
-        <h3>{{ category.icon }} {{ category.name }}</h3>
-        <table>
-          <thead>
+        <h3 class="text-lg font-semibold text-gray-700 border-l-4 border-green-500 pl-2 mt-4">
+          {{ category.icon }} {{ category.name }}
+        </h3>
+        <table class="w-full text-sm border-collapse mt-2">
+          <thead class="bg-gray-100">
             <tr>
-              <th>Food</th>
-              <th>Calories</th>
-              <th>Carbs</th>
-              <th>Protein</th>
-              <th>Fat</th>
-              <th>Fiber</th>
+              <th class="px-4 py-2 text-left font-semibold text-gray-700">Food</th>
+              <th class="px-4 py-2 text-left font-semibold text-gray-700">Calories</th>
+              <th class="px-4 py-2 text-left font-semibold text-gray-700">Carbs</th>
+              <th class="px-4 py-2 text-left font-semibold text-gray-700">Protein</th>
+              <th class="px-4 py-2 text-left font-semibold text-gray-700">Fat</th>
+              <th class="px-4 py-2 text-left font-semibold text-gray-700">Fiber</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let food of category.items">
-              <td>{{ food.name }}</td>
-              <td>{{ food.calories }} kcal</td>
-              <td>{{ food.carbs }} g</td>
-              <td>{{ food.protein }} g</td>
-              <td>{{ food.fat }} g</td>
-              <td>{{ food.fiber }} g</td>
+            <tr *ngFor="let food of category.items"
+              class="hover:bg-green-50 transition-colors duration-200">
+              <td class="px-4 py-2 text-gray-600">{{ food.name }}</td>
+              <td class="px-4 py-2 text-gray-600">{{ food.calories }} kcal</td>
+              <td class="px-4 py-2 text-gray-600">{{ food.carbs }} g</td>
+              <td class="px-4 py-2 text-gray-600">{{ food.protein }} g</td>
+              <td class="px-4 py-2 text-gray-600">{{ food.fat }} g</td>
+              <td class="px-4 py-2 text-gray-600">{{ food.fiber }} g</td>
             </tr>
           </tbody>
         </table>
