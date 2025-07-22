@@ -28,11 +28,11 @@ export class DiaryComponent {
     remaining: ''
   };
 
-  targets: Record<NutrientKey, number> = {
-    energy: 0,
-    protein: 0,
-    carbs: 0,
-    fat: 0
+  targets: Record<NutrientKey,any> = {
+    energy: null,
+    protein: null,
+    carbs: null,
+    fat: null
   };
 
   consumed: Record<NutrientKey, number> = {
