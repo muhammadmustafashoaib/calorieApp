@@ -95,16 +95,35 @@
   </div>
 
   <div
-    *ngIf="results"
-    class="mt-4 p-4 bg-green-50 border-l-4 border-green-500 rounded shadow-sm animate-fade-in"
-  >
-    <p class="text-sm text-gray-700">
-      ✅ <span class="font-semibold">Ideal Weight:</span>
-      <span class="font-bold text-green-700">{{ results.idealWeightKg }} kg</span>
-    </p>
-    <p class="text-sm text-gray-700">
-      🔥 <span class="font-semibold">Suggested Daily Calories:</span>
-      <span class="font-bold text-green-700">{{ results.calories }} kcal</span>
-    </p>
-  </div>
+  *ngIf="results"
+  class="mt-4 p-4 bg-green-50 border-l-4 border-green-500 rounded shadow-sm animate-fade-in space-y-1"
+>
+  <p class="text-sm text-gray-700">
+    ✅ <span class="font-semibold">Ideal Weight:</span>
+    <span class="font-bold text-green-700">{{ results.idealWeightKg }} kg</span>
+  </p>
+  <p class="text-sm text-gray-700">
+    🔥 <span class="font-semibold">Suggested Daily Calories (with activity):</span>
+    <span class="font-bold text-green-700">{{ results.calories }} kcal</span>
+  </p>
+  <p class="text-sm text-gray-700">
+    📊 <span class="font-semibold">BMI:</span>
+    <span class="font-bold text-green-700">{{ results.bmi }}</span>
+    — <span class="font-semibold">{{ results.bmiCategory }}</span>
+  </p>
+  <p class="text-sm text-gray-700">
+    🎯 <span class="font-semibold">Recommendation:</span>
+    <span
+      class="font-bold"
+      [ngClass]="{
+        'text-green-700': results.recommendationColor === 'green',
+        'text-red-600': results.recommendationColor === 'red',
+        'text-yellow-600': results.recommendationColor === 'yellow'
+      }"
+    >
+      {{ results.recommendation }}
+    </span>
+  </p>
+</div>
+
 </div>
