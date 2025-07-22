@@ -1,27 +1,27 @@
-# CalorieTracker
+CalorieTracker is a modern, responsive frontend application built with Angular 16.2.16, TypeScript, HTML, and Tailwind CSS.
+It serves as the user interface for a calorie-tracking platform — designed and developed by Mustafa, a Dietitian by degree and a Frontend Developer by profession.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
+🚀 Getting Started
+Follow these steps to set up and run the project locally:
 
-## Development server
+1️⃣ Download the source code:
+Click on Download ZIP or clone the repository using Git.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+2️⃣ Install dependencies:
+Open a terminal in the project directory and run:
+npm install
 
-## Code scaffolding
+3️⃣ Start the development server:
+Run the app in your browser with live reload:
+ng serve --open
+The application will open automatically at http://localhost:4200/.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+📚 Tech Stack
+Angular CLI (v16.2.16)
+TypeScript
+HTML5
+Tailwind CSS
 
-## Build
+👨‍💻 About the Author
+Developed by Mustafa — combining expertise in Nutrition and Frontend Development to create intuitive and meaningful user experiences.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
