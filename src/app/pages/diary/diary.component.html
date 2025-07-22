@@ -1,75 +1,135 @@
-<div class="p-6 space-y-8 font-sans text-gray-700 animate-fade-in">
+<div class="p-6 space-y-6 font-sans text-gray-700 animate-fade-in">
 
-  <!-- Categories -->
-  <div class="space-y-4">
-    <div *ngFor="let category of categories; let i = index">
-      <div
-        class="cursor-pointer bg-gray-50 p-3 text-base font-semibold text-gray-800 border border-gray-200 rounded shadow-sm hover:bg-green-50 hover:scale-[1.02] transition-all duration-300 ease-out tracking-wide"
-        (click)="toggleCategory(i)">
-        {{ category.name }}
-      </div>
-      <ul *ngIf="category.expanded" class="list-none pl-6 mt-2 space-y-1 animate-slide-down">
-        <li
-          *ngFor="let food of category.foods"
-          class="text-sm text-gray-600 bg-gray-100 px-2 py-1 rounded hover:bg-green-100 transition tracking-normal">
-          {{ food }}
-        </li>
-      </ul>
-    </div>
+  <!-- Date Filter -->
+  <div class="flex flex-wrap gap-3 items-center bg-white p-3 rounded shadow hover:shadow-md transition">
+    <label class="text-sm font-medium text-gray-600">
+      Select Date:
+      <input
+        type="date"
+        [(ngModel)]="selectedDate"
+        class="ml-2 px-2 py-1 border rounded shadow-sm text-sm text-gray-700 hover:border-green-400 focus:ring focus:ring-green-100"
+      />
+    </label>
   </div>
 
-  <!-- Add Food -->
-  <div
-    class="flex flex-wrap items-center gap-3 bg-gray-50 p-4 rounded shadow hover:shadow-md transition-all duration-300">
-    <label class="text-sm font-medium uppercase tracking-wide text-gray-600">
-      Select Category:
-      <select [(ngModel)]="selectedCategoryIndex"
-        class="ml-1 px-3 py-1.5 border border-gray-300 rounded shadow-sm focus:ring focus:ring-green-100 text-sm text-gray-800 transition duration-300 hover:border-green-400">
+  <!-- Add Food with Category -->
+  <div class="flex flex-wrap gap-3 bg-gray-50 p-4 rounded shadow hover:shadow-md transition">
+    <label class="text-sm font-medium text-gray-600">
+      Category:
+      <select
+        [(ngModel)]="selectedCategoryIndex"
+        class="ml-1 px-3 py-1.5 border rounded shadow-sm text-sm text-gray-800 hover:border-green-400 focus:ring focus:ring-green-100"
+      >
         <option *ngFor="let category of categories; let i = index" [value]="i">
           {{ category.name }}
         </option>
       </select>
     </label>
-    <input
-      [(ngModel)]="newFood"
-      class="px-3 py-1.5 border border-gray-300 rounded shadow-sm focus:ring focus:ring-green-100 text-sm text-gray-800 transition duration-300 hover:border-green-400"
-      placeholder="Enter food name" />
+
+    <label class="text-sm font-medium text-gray-600">
+      Food:
+      <select
+        [(ngModel)]="selectedFoodFromList"
+        class="ml-1 px-3 py-1.5 border rounded shadow-sm text-sm text-gray-800 hover:border-green-400 focus:ring focus:ring-green-100"
+      >
+        <option value="">-- Choose Food --</option>
+        <option *ngFor="let food of foodList" [value]="food.name">
+          {{ food.name }} ({{ food.calories }} kcal)
+        </option>
+      </select>
+    </label>
+
     <button
-      (click)="addFood()"
-      class="px-4 py-1.5 bg-green-600 text-white rounded shadow hover:bg-green-700 hover:scale-105 transition duration-300 text-sm font-semibold tracking-wide">
-      ➕ Add Food
+      (click)="addFoodToCategory()"
+      class="px-4 py-1.5 bg-green-600 text-white rounded shadow hover:bg-green-700 hover:scale-105 transition text-sm font-semibold"
+    >
+      ➕ Add
     </button>
+  </div>
+
+  <!-- Categories -->
+  <div class="space-y-4">
+    <div *ngFor="let category of categories; let i = index">
+      <div
+        class="cursor-pointer bg-gray-50 p-3 text-base font-semibold text-gray-800 border border-gray-200 rounded shadow-sm hover:bg-green-50 hover:scale-[1.02] transition"
+        (click)="toggleCategory(i)"
+      >
+        {{ category.name }}
+      </div>
+
+      <table
+        *ngIf="category.expanded"
+        class="w-full mt-2 text-sm bg-white rounded shadow table-auto"
+      >
+        <thead class="bg-gray-100 text-gray-600 uppercase text-xs">
+          <tr>
+            <th class="p-2 text-left">Food</th>
+            <th class="p-2 text-left">Carbs (g)</th>
+            <th class="p-2 text-left">Protein (g)</th>
+            <th class="p-2 text-left">Fat (g)</th>
+            <th class="p-2 text-left">Calories</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let food of category.foods"
+            class="hover:bg-green-50 transition"
+          >
+            <td class="p-2">{{ food.name }}</td>
+            <td class="p-2">{{ food.carbs }}</td>
+            <td class="p-2">{{ food.protein }}</td>
+            <td class="p-2">{{ food.fat }}</td>
+            <td class="p-2">{{ food.calories }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <!-- Energy Summary -->
   <div
-    class="flex flex-col sm:flex-row justify-between gap-3 bg-gradient-to-r from-green-50 to-green-100 rounded p-4 shadow-inner animate-fade-in space-y-2 sm:space-y-0">
-    <div class="text-center flex-1 hover:scale-105 transition-all duration-300">
-      <p class="text-xs text-gray-500 uppercase tracking-wider">Consumed</p>
-      <p class="font-bold text-green-700 text-lg tracking-tight">{{ energySummary.consumed }} kcal</p>
+    class="flex flex-col sm:flex-row justify-between gap-3 
+           bg-gradient-to-r from-green-50 to-green-100 
+           rounded-xl p-6 shadow-inner hover:shadow-lg 
+           transition-all duration-300 hover:scale-[1.01] font-sans"
+  >
+    <!-- Consumed -->
+    <div
+      class="text-center flex-1 hover:scale-105 hover:brightness-105 hover:shadow-md 
+             transition-all duration-300 cursor-pointer rounded-lg p-3 bg-white/50"
+    >
+      <p class="text-[11px] text-gray-600 uppercase tracking-widest font-medium">
+        Consumed
+      </p>
+      <p class="font-semibold text-green-700 text-2xl tracking-tight drop-shadow">
+        {{ energySummary.consumed }} kcal
+      </p>
     </div>
-    <div class="text-center flex-1 hover:scale-105 transition-all duration-300">
-      <p class="text-xs text-gray-500 uppercase tracking-wider">Expenditure</p>
-      <p class="font-bold text-red-600 text-lg tracking-tight">{{ energySummary.expenditure }} kcal</p>
-    </div>
-    <div class="text-center flex-1 hover:scale-105 transition-all duration-300">
-      <p class="text-xs text-gray-500 uppercase tracking-wider">Remaining</p>
-      <p class="font-bold text-blue-600 text-lg tracking-tight">{{ energySummary.remaining }} kcal</p>
-    </div>
-  </div>
 
-  <!-- Targets -->
-  <div
-    class="bg-white rounded p-4 shadow hover:shadow-md transition-all duration-300 space-y-2 animate-fade-in">
-    <h3 class="text-sm font-semibold text-gray-700 mb-1 uppercase tracking-wide">Targets</h3>
-    <div *ngFor="let key of keys">
-      <p class="text-sm text-gray-600 tracking-normal">
-        <span class="font-medium text-gray-800">{{ key | titlecase }}:</span>
-        {{ consumed[key] }} /
-        {{ targets[key] }}
-        <span class="text-xs uppercase text-gray-400">{{ key === 'energy' ? 'kcal' : 'g' }}</span>
+    <!-- Expenditure -->
+    <div
+      class="text-center flex-1 hover:scale-105 hover:brightness-105 hover:shadow-md 
+             transition-all duration-300 cursor-pointer rounded-lg p-3 bg-white/50"
+    >
+      <p class="text-[11px] text-gray-600 uppercase tracking-widest font-medium">
+        Expenditure
+      </p>
+      <p class="font-semibold text-red-600 text-2xl tracking-tight drop-shadow">
+        {{ energySummary.expenditure }} kcal
+      </p>
+    </div>
+
+    <!-- Remaining -->
+    <div
+      class="text-center flex-1 hover:scale-105 hover:brightness-105 hover:shadow-md 
+             transition-all duration-300 cursor-pointer rounded-lg p-3 bg-white/50"
+    >
+      <p class="text-[11px] text-gray-600 uppercase tracking-widest font-medium">
+        Remaining
+      </p>
+      <p class="font-semibold text-blue-600 text-2xl tracking-tight drop-shadow">
+        {{ energySummary.remaining }} kcal
       </p>
     </div>
   </div>
-
 </div>
