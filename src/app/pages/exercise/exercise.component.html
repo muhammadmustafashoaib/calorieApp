@@ -1,29 +1,36 @@
-<div class="exercise-container">
-  <header class="header">
-    <h2>🏋️ Exercise Tracker</h2>
-    <p class="subtitle">Log your exercises &amp; track burned calories.</p>
+<div class="max-w-5xl mx-auto py-10 px-4">
+  <header class="text-center mb-10">
+    <h2 class="text-3xl font-bold tracking-tight mb-1">🏋️ Exercise Tracker</h2>
+    <p class="text-gray-600 text-lg">Log your exercises &amp; track burned calories.</p>
   </header>
 
-  <section class="card">
-    <form class="exercise-form" (ngSubmit)="logExercise()" novalidate>
-      <div class="form-group">
-        <label for="exercise">Exercise</label>
-     <select
-  id="exercise"
-  name="exercise"
-  [(ngModel)]="selectedExercise"
-  required
->
-  <option [ngValue]="null" disabled>Select Exercise</option>
-  <option *ngFor="let e of exercisesList" [ngValue]="e">
-    {{ e.name }}
-  </option>
-</select>
+  <section class="bg-white rounded-2xl shadow p-8 mb-10">
+    <form class="flex flex-wrap gap-6 items-end" (ngSubmit)="logExercise()" novalidate>
+      <div class="flex flex-col gap-1 min-w-[180px] flex-1">
+        <label for="exercise" class="font-semibold text-gray-800">Exercise</label>
+        <select
+          id="exercise"
+          name="exercise"
+          [(ngModel)]="selectedExercise"
+          required
+          class="px-4 py-3 border border-gray-300 rounded-lg text-base bg-gray-50 focus:border-green-600 focus:outline-none"
+        >
+          <option [ngValue]="null" disabled>Select Exercise</option>
+          <option *ngFor="let e of exercisesList" [ngValue]="e">
+            {{ e.name }}
+          </option>
+        </select>
       </div>
 
-      <div class="form-group">
-        <label for="duration">Duration</label>
-        <select id="duration" name="duration" [(ngModel)]="duration" required>
+      <div class="flex flex-col gap-1 min-w-[180px] flex-1">
+        <label for="duration" class="font-semibold text-gray-800">Duration</label>
+        <select
+          id="duration"
+          name="duration"
+          [(ngModel)]="duration"
+          required
+          class="px-4 py-3 border border-gray-300 rounded-lg text-base bg-gray-50 focus:border-green-600 focus:outline-none"
+        >
           <option [ngValue]="null" disabled>Duration</option>
           <option *ngFor="let d of durationsList" [ngValue]="d">
             {{ d }} minutes
@@ -33,16 +40,16 @@
 
       <button
         type="submit"
-        class="btn-primary"
         [disabled]="!selectedExercise || !duration"
         [attr.aria-disabled]="(!selectedExercise || !duration).toString()"
+        class="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-full px-6 py-3 font-semibold text-base shadow hover:from-green-600 hover:to-green-700 disabled:opacity-60 disabled:cursor-not-allowed transition"
       >
         {{ editingIndex !== null ? "✏️ Update Exercise" : "➕ Log Exercise" }}
       </button>
     </form>
 
     <div
-      class="calories-preview"
+      class="mt-5 text-center text-lg text-gray-800"
       *ngIf="selectedExercise && duration"
       aria-live="polite"
     >
@@ -54,54 +61,51 @@
     </div>
   </section>
 
-  <section class="logged-list" *ngIf="loggedExercises.length > 0">
-    <h3 class="logged-title">
-      <span class="logged-icon">📋</span>
-      Logged Exercises
+  <section *ngIf="loggedExercises.length > 0">
+    <h3 class="flex items-center text-2xl font-bold mb-6">
+      <span class="text-2xl mr-2">📋</span> Logged Exercises
     </h3>
-    <div class="log-card-list">
-      <div class="log-card" *ngFor="let ex of loggedExercises; let i = index">
-        <div class="log-card-info">
-          <div class="log-card-name"><strong>{{ ex.name }}</strong></div>
-          <div class="log-card-meta">
-            {{ ex.duration }} min &bull; {{ ex.calories }} kcal
-          </div>
-        </div>
-        <div class="log-card-actions">
-      <div class="log-card-actions">
-  <button
-    class="action-btn"
-    (click)="editExercise(i)"
-    [attr.aria-label]="'Edit ' + ex.name"
-  >
-    <span class="emoji" style="color:#f57c00;">&#9998;</span>
-  </button>
-  <button
-    class="action-btn"
-    (click)="removeExercise(i)"
-    [attr.aria-label]="'Remove ' + ex.name"
-  >
-    <span class="emoji" style="color:#757575;">&#10060;</span>
-  </button>
-</div>
 
+    <div class="mb-10">
+      <div
+        *ngFor="let ex of loggedExercises; let i = index"
+        class="flex justify-between items-center bg-white rounded-2xl shadow p-6 mb-6 flex-wrap sm:flex-nowrap"
+      >
+        <div>
+          <div class="text-lg font-bold mb-1">{{ ex.name }}</div>
+          <div class="text-gray-600">{{ ex.duration }} min &bull; {{ ex.calories }} kcal</div>
+        </div>
+        <div class="flex gap-4 mt-3 sm:mt-0">
+          <button
+            (click)="editExercise(i)"
+            [attr.aria-label]="'Edit ' + ex.name"
+            class="text-orange-600 hover:text-orange-700 transition"
+          >
+            ✏️
+          </button>
+          <button
+            (click)="removeExercise(i)"
+            [attr.aria-label]="'Remove ' + ex.name"
+            class="text-red-600 hover:text-red-700 transition"
+          >
+            ❌
+          </button>
         </div>
       </div>
     </div>
 
-    <div class="totals-section">
-      <h4 class="totals-title">
-        <span class="totals-icon">✅</span>
-        Totals
+    <div class="bg-white rounded-2xl shadow p-8">
+      <h4 class="flex items-center text-xl font-bold mb-6">
+        <span class="mr-2">✅</span> Totals
       </h4>
-      <div class="totals-cards">
-        <div class="totals-card">
-          <div class="totals-label">Total Time</div>
-          <div class="totals-value">{{ totalTime }} minutes</div>
+      <div class="flex gap-6 flex-wrap">
+        <div class="bg-gray-50 rounded-xl shadow-sm px-8 py-6 flex-1 text-center">
+          <div class="text-gray-500 text-lg mb-1">Total Time</div>
+          <div class="text-xl font-bold">{{ totalTime }} minutes</div>
         </div>
-        <div class="totals-card">
-          <div class="totals-label">Total Calories Burned</div>
-          <div class="totals-value">{{ totalCalories }} kcal</div>
+        <div class="bg-gray-50 rounded-xl shadow-sm px-8 py-6 flex-1 text-center">
+          <div class="text-gray-500 text-lg mb-1">Total Calories Burned</div>
+          <div class="text-xl font-bold">{{ totalCalories }} kcal</div>
         </div>
       </div>
     </div>
