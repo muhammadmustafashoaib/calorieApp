@@ -1,113 +1,102 @@
-<div class="max-w-5xl mx-auto py-10 px-4">
-  <header class="text-center mb-10">
-    <h2 class="text-3xl font-bold tracking-tight mb-1">🏋️ Exercise Tracker</h2>
-    <p class="text-gray-600 text-lg">Log your exercises &amp; track burned calories.</p>
+<div class="max-w-4xl mx-auto py-12 px-4 md:px-6 text-gray-900">
+  <!-- Header -->
+  <header class="text-center mb-12">
+    <h1 class="text-4xl font-extrabold tracking-tight text-gray-900">
+      <span class="bg-gradient-to-r from-green-500 to-teal-400 bg-clip-text text-transparent">Exercise Tracker</span>
+    </h1>
+    <p class="mt-1 text-base text-gray-500">Track your workouts & calories — with a clean modern feel.</p>
   </header>
 
-  <section class="bg-white rounded-2xl shadow p-8 mb-10">
-    <form class="flex flex-wrap gap-6 items-end" (ngSubmit)="logExercise()" novalidate>
-      <div class="flex flex-col gap-1 min-w-[180px] flex-1">
-        <label for="exercise" class="font-semibold text-gray-800">Exercise</label>
+  <!-- Form -->
+  <section class="bg-white/60 backdrop-blur-md rounded-3xl shadow-sm px-6 py-8 mb-10">
+    <form class="grid grid-cols-1 md:grid-cols-3 gap-4" (ngSubmit)="logExercise()" novalidate>
+      <div>
+        <label for="exercise" class="text-xs font-medium text-gray-600 uppercase tracking-wide">Exercise</label>
         <select
           id="exercise"
           name="exercise"
           [(ngModel)]="selectedExercise"
           required
-          class="px-4 py-3 border border-gray-300 rounded-lg text-base bg-gray-50 focus:border-green-600 focus:outline-none"
+          class="mt-1 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-green-500 focus:ring-1 focus:ring-green-100 transition"
         >
           <option [ngValue]="null" disabled>Select Exercise</option>
-          <option *ngFor="let e of exercisesList" [ngValue]="e">
-            {{ e.name }}
-          </option>
+          <option *ngFor="let e of exercisesList" [ngValue]="e">{{ e.name }}</option>
         </select>
       </div>
 
-      <div class="flex flex-col gap-1 min-w-[180px] flex-1">
-        <label for="duration" class="font-semibold text-gray-800">Duration</label>
+      <div>
+        <label for="duration" class="text-xs font-medium text-gray-600 uppercase tracking-wide">Duration</label>
         <select
           id="duration"
           name="duration"
           [(ngModel)]="duration"
           required
-          class="px-4 py-3 border border-gray-300 rounded-lg text-base bg-gray-50 focus:border-green-600 focus:outline-none"
+          class="mt-1 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-green-500 focus:ring-1 focus:ring-green-100 transition"
         >
           <option [ngValue]="null" disabled>Duration</option>
-          <option *ngFor="let d of durationsList" [ngValue]="d">
-            {{ d }} minutes
-          </option>
+          <option *ngFor="let d of durationsList" [ngValue]="d">{{ d }} minutes</option>
         </select>
       </div>
 
-      <button
-        type="submit"
-        [disabled]="!selectedExercise || !duration"
-        [attr.aria-disabled]="(!selectedExercise || !duration).toString()"
-        class="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-full px-6 py-3 font-semibold text-base shadow hover:from-green-600 hover:to-green-700 disabled:opacity-60 disabled:cursor-not-allowed transition"
-      >
-        {{ editingIndex !== null ? "✏️ Update Exercise" : "➕ Log Exercise" }}
-      </button>
+      <div class="flex items-end">
+        <button
+          type="submit"
+          [disabled]="!selectedExercise || !duration"
+          class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2.5 rounded-lg shadow-sm disabled:opacity-40 transition"
+        >
+          {{ editingIndex !== null ? "Update" : "Log" }}
+        </button>
+      </div>
     </form>
 
-    <div
-      class="mt-5 text-center text-lg text-gray-800"
-      *ngIf="selectedExercise && duration"
-      aria-live="polite"
-    >
-      <p>
-        🔥 <strong>{{ calculatedCalories }}</strong> kcal burned for
-        <strong>{{ duration }}</strong> min of
-        <strong>{{ selectedExercise.name }}</strong>
-      </p>
-    </div>
+
   </section>
 
-  <section *ngIf="loggedExercises.length > 0">
-    <h3 class="flex items-center text-2xl font-bold mb-6">
-      <span class="text-2xl mr-2">📋</span> Logged Exercises
-    </h3>
-
-    <div class="mb-10">
-      <div
+  <!-- Logged Exercises -->
+  <section *ngIf="loggedExercises.length > 0" class="space-y-6">
+    <h2 class="text-xl font-semibold text-gray-800 mb-2">Logged Exercises</h2>
+    <ul class="divide-y divide-gray-200 rounded-xl bg-white/50 backdrop-blur-md shadow-sm">
+      <li
         *ngFor="let ex of loggedExercises; let i = index"
-        class="flex justify-between items-center bg-white rounded-2xl shadow p-6 mb-6 flex-wrap sm:flex-nowrap"
+        class="flex justify-between items-center px-4 py-3 hover:bg-gray-50 transition"
       >
         <div>
-          <div class="text-lg font-bold mb-1">{{ ex.name }}</div>
-          <div class="text-gray-600">{{ ex.duration }} min &bull; {{ ex.calories }} kcal</div>
+          <div class="text-sm font-medium text-gray-900">{{ ex.name }}</div>
+          <div class="text-xs text-gray-500">{{ ex.duration }} min • {{ ex.calories }} kcal</div>
         </div>
-        <div class="flex gap-4 mt-3 sm:mt-0">
+        <div class="flex gap-1">
           <button
             (click)="editExercise(i)"
-            [attr.aria-label]="'Edit ' + ex.name"
-            class="text-orange-600 hover:text-orange-700 transition"
+            class="text-gray-500 hover:text-green-600 p-1 rounded-md hover:bg-green-50 transition"
+            aria-label="Edit"
           >
-            ✏️
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5m-1-7l-7 7m0 0l7-7m-7 7V4" />
+            </svg>
           </button>
           <button
             (click)="removeExercise(i)"
-            [attr.aria-label]="'Remove ' + ex.name"
-            class="text-red-600 hover:text-red-700 transition"
+            class="text-gray-500 hover:text-red-600 p-1 rounded-md hover:bg-red-50 transition"
+            aria-label="Delete"
           >
-            ❌
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
           </button>
         </div>
-      </div>
-    </div>
+      </li>
+    </ul>
+  </section>
 
-    <div class="bg-white rounded-2xl shadow p-8">
-      <h4 class="flex items-center text-xl font-bold mb-6">
-        <span class="mr-2">✅</span> Totals
-      </h4>
-      <div class="flex gap-6 flex-wrap">
-        <div class="bg-gray-50 rounded-xl shadow-sm px-8 py-6 flex-1 text-center">
-          <div class="text-gray-500 text-lg mb-1">Total Time</div>
-          <div class="text-xl font-bold">{{ totalTime }} minutes</div>
-        </div>
-        <div class="bg-gray-50 rounded-xl shadow-sm px-8 py-6 flex-1 text-center">
-          <div class="text-gray-500 text-lg mb-1">Total Calories Burned</div>
-          <div class="text-xl font-bold">{{ totalCalories }} kcal</div>
-        </div>
-      </div>
+  <!-- Totals -->
+  <section *ngIf="loggedExercises.length > 0" class="mt-10 grid gap-4 md:grid-cols-2">
+    <div class="bg-white/60 backdrop-blur rounded-xl p-4 text-center shadow-sm">
+      <div class="text-xs text-gray-500">Total Time</div>
+      <div class="text-lg font-medium text-gray-800">{{ totalTime }} minutes</div>
+    </div>
+    <div class="bg-white/60 backdrop-blur rounded-xl p-4 text-center shadow-sm">
+      <div class="text-xs text-gray-500">Total Calories Burned</div>
+      <div class="text-lg font-medium text-gray-800">{{ totalCalories }} kcal</div>
     </div>
   </section>
 </div>
