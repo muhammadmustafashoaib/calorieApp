@@ -3,13 +3,14 @@ import { ChartConfiguration, ChartType, ChartTypeRegistry, CoreChartOptions, Dat
 import { _DeepPartialObject } from 'chart.js/dist/types/utils';
 import { FoodEntry } from 'src/models/food-entry.model';
 import { FoodService } from 'src/services/food.service';
-
+import { Route } from '@angular/router';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent {
+export class DashboardComponent  {
    gender: 'male' | 'female' = 'male';
   heightCm: number | '' = '';
   heightFt: number | '' = '';
@@ -18,6 +19,8 @@ export class DashboardComponent {
   weightLbs: number | '' = '';
 
   results: { idealWeightKg: number; calories: number } | null = null;
+  constructor(public route: Router) {}
+
 
   calculate() {
     let heightInInches: number;
