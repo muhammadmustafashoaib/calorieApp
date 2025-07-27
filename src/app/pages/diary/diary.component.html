@@ -71,10 +71,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr
-            *ngFor="let food of category.foods"
-            class="hover:bg-green-50 transition"
-          >
+       <tr
+  *ngFor="let food of getFoodsForSelectedDate(category.foods)"
+  class="hover:bg-green-50 transition"
+>
             <td class="p-2">{{ food.name }}</td>
             <td class="p-2">{{ food.carbs }}</td>
             <td class="p-2">{{ food.protein }}</td>

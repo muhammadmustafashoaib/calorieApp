@@ -9,6 +9,7 @@ interface Food {
   protein: number;
   fat: number;
   calories: number;
+  date: string; // New field
 }
 @Component({
   selector: 'app-diary',
@@ -18,7 +19,15 @@ interface Food {
 
 export class DiaryComponent {
  
-   selectedDate: string = '';
+    private _selectedDate = '';
+  get selectedDate(): string {
+    return this._selectedDate;
+  }
+  set selectedDate(value: string) {
+    this._selectedDate = value;
+    this.updateSummaryForDate(value);
+  }
+
   selectedCategoryIndex: number = 0;
   selectedFoodFromList: string = '';
 
@@ -29,7 +38,7 @@ export class DiaryComponent {
     { name: 'Snacks', expanded: false, foods: [] as Food[] }
   ];
 
-  foodList: Food[] = [
+  foodList: Omit<Food, 'date'>[] = [
     { name: 'Apple', carbs: 25, protein: 0, fat: 0, calories: 95 },
     { name: 'Banana', carbs: 27, protein: 1, fat: 0, calories: 105 },
     { name: 'Rice', carbs: 45, protein: 4, fat: 0, calories: 200 },
@@ -44,7 +53,6 @@ export class DiaryComponent {
     { name: 'Pasta', carbs: 43, protein: 8, fat: 1, calories: 220 },
     { name: 'Cheese', carbs: 1, protein: 7, fat: 9, calories: 110 },
     { name: 'Avocado', carbs: 9, protein: 2, fat: 15, calories: 160 },
-    // Add more as needed
   ];
 
   energySummary = {
@@ -58,18 +66,40 @@ export class DiaryComponent {
   }
 
   addFoodToCategory() {
-    if (!this.selectedFoodFromList) return;
+    if (!this.selectedFoodFromList || !this.selectedDate) return;
 
     const category = this.categories[this.selectedCategoryIndex];
-    const foodObj = this.foodList.find(f => f.name === this.selectedFoodFromList);
+    const baseFood = this.foodList.find(f => f.name === this.selectedFoodFromList);
 
-    if (foodObj) {
-      category.foods.push({ ...foodObj });
+    if (baseFood) {
+      const newFood: Food = { ...baseFood, date: this.selectedDate };
+      category.foods.push(newFood);
 
-      this.energySummary.consumed += foodObj.calories;
-      this.energySummary.remaining = this.energySummary.expenditure - this.energySummary.consumed;
+      // Update summary only if the food is for currently selected date
+      if (newFood.date === this.selectedDate) {
+        this.energySummary.consumed += newFood.calories;
+        this.energySummary.remaining = this.energySummary.expenditure - this.energySummary.consumed;
+      }
     }
 
     this.selectedFoodFromList = '';
   }
+
+  updateSummaryForDate(date: string) {
+    let total = 0;
+    for (const category of this.categories) {
+      for (const food of category.foods) {
+        if (food.date === date) {
+          total += food.calories;
+        }
+      }
+    }
+
+    this.energySummary.consumed = total;
+    this.energySummary.remaining = this.energySummary.expenditure - total;
+  }
+  getFoodsForSelectedDate(foods: Food[]): Food[] {
+  if (!this.selectedDate) return [];
+  return foods.filter(f => f.date === this.selectedDate);
+}
 }
