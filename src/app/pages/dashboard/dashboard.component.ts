@@ -49,4 +49,15 @@ export class DashboardComponent  {
 
     this.results = { idealWeightKg, calories };
   }
+
+  showToast = false;
+
+  ngOnInit(): void {
+    this.showToast = true;
+
+    // Auto-hide after 5 seconds
+    setTimeout(() => {
+      this.showToast = false;
+    }, 5000);
+  }
 }
